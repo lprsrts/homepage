@@ -68,12 +68,19 @@ const TerminalBody = styled.div`
 const TerminalLine = styled.div`
   display: flex;
   margin-bottom: 0.5rem;
+  flex-wrap: wrap;
 `;
 
 const TerminalPrompt = styled.span`
   color: #4f8fff;
   margin-right: 8px;
   white-space: nowrap;
+  flex-shrink: 0;
+`;
+
+const TerminalContent = styled.span`
+  word-break: break-word;
+  white-space: pre-wrap;
 `;
 
 const TerminalCursor = styled.span`
@@ -216,7 +223,7 @@ const Terminal: React.FC<TerminalProps> = ({
   }, [lines, currentLine]);
 
   const renderPrompt = () => (
-    <TerminalPrompt>alper@macbook:~/portfolio$</TerminalPrompt>
+    <TerminalPrompt>alpersaritas@MacBook: ~/portfolio$</TerminalPrompt>
   );
 
   return (
@@ -235,7 +242,8 @@ const Terminal: React.FC<TerminalProps> = ({
         {lines.map((line, index) => (
           line.type === 'command' ? (
             <TerminalLine key={`line-${index}`}>
-              {renderPrompt()} {line.content}
+              {renderPrompt()} 
+              <TerminalContent>{line.content}</TerminalContent>
             </TerminalLine>
           ) : (
             <TerminalOutput key={`output-${index}`}>
@@ -247,8 +255,11 @@ const Terminal: React.FC<TerminalProps> = ({
         {/* Currently typing command line */}
         {!isComplete && currentStep !== AnimationStep.SHOWING_OUTPUT && currentStep !== AnimationStep.PAUSE_AFTER_OUTPUT && (
           <TerminalLine>
-            {renderPrompt()} {currentLine}
-            {currentStep !== AnimationStep.PAUSE_AFTER_TYPING && <TerminalCursor />}
+            {renderPrompt()} 
+            <TerminalContent>
+              {currentLine}
+              {currentStep !== AnimationStep.PAUSE_AFTER_TYPING && <TerminalCursor />}
+            </TerminalContent>
           </TerminalLine>
         )}
         
