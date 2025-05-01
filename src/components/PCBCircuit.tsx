@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, ReactElement } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion, useAnimation } from 'framer-motion';
 
@@ -21,44 +21,6 @@ const PCBBoard = styled.div`
   height: 100%;
   background-color: rgba(0, 30, 20, 0.15);
   box-shadow: inset 0 0 100px rgba(0, 20, 10, 0.2);
-`;
-
-// Circuit trace/path
-const CircuitTrace = styled(motion.div)<{ $width: string; $height: string; $top: string; $left: string; $rotate?: string; $color?: string; $radius?: string; }>`
-  position: absolute;
-  top: ${props => props.$top};
-  left: ${props => props.$left};
-  width: ${props => props.$width};
-  height: ${props => props.$height};
-  background-color: ${props => props.$color || 'rgba(40, 40, 40, 0.7)'};
-  transform: ${props => props.$rotate ? `rotate(${props.$rotate})` : 'none'};
-  border-radius: ${props => props.$radius || (props.$height === '2px' ? '1px' : props.$width === '2px' ? '1px' : '0')};
-`;
-
-// Curved circuit trace
-const CurvedTrace = styled(motion.div)<{ $top: string; $left: string; $size: string; $borderStartAngle: string; $borderEndAngle: string; $color?: string; }>`
-  position: absolute;
-  top: ${props => props.$top};
-  left: ${props => props.$left};
-  width: ${props => props.$size};
-  height: ${props => props.$size};
-  border: 2px solid ${props => props.$color || 'rgba(40, 40, 40, 0.7)'};
-  border-radius: 50%;
-  clip-path: polygon(50% 50%, ${props => props.$borderStartAngle}, ${props => props.$borderEndAngle}, 50% 50%);
-  background-color: transparent;
-`;
-
-// Via (connection between layers)
-const Via = styled(motion.div)<{ $top: string; $left: string; $size?: string; $color?: string; }>`
-  position: absolute;
-  top: ${props => props.$top};
-  left: ${props => props.$left};
-  width: ${props => props.$size || '6px'};
-  height: ${props => props.$size || '6px'};
-  background-color: ${props => props.$color || 'rgba(70, 70, 70, 0.8)'};
-  border: 1px solid rgba(90, 90, 90, 0.8);
-  border-radius: 50%;
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
 `;
 
 // Component base (general electronic component)
@@ -397,142 +359,6 @@ const RGBLED = styled(Component)`
   padding: 2px;
 `;
 
-// A pulse that travels along circuit traces
-const ElectricalPulse = styled(motion.div)<{ $size: string; $color?: string; }>`
-  position: absolute;
-  width: ${props => props.$size};
-  height: ${props => props.$size};
-  background-color: ${props => props.$color || 'rgba(79, 143, 255, 0.9)'};
-  border-radius: 50%;
-  box-shadow: ${props => `0 0 8px 2px ${props.$color || 'rgba(79, 143, 255, 0.6)'}`};
-`;
-
-// Container for a pulse path
-const PulsePath = styled.div`
-  position: absolute;
-  overflow: visible;
-  width: 100%;
-  height: 100%;
-`;
-
-// Circuit traces where the pulses will travel - enhanced with more complex paths
-const CIRCUIT_PATHS = [
-  // Path 1: From bottom to microprocessor - more complex route
-  [
-    { x: '50%', y: '90%' },
-    { x: '50%', y: '80%' },
-    { x: '42%', y: '80%' },
-    { x: '42%', y: '65%' },
-    { x: '55%', y: '65%' },
-    { x: '55%', y: '50%' },
-  ],
-  // Path 2: From left to microprocessor - curved path
-  [
-    { x: '5%', y: '45%' },
-    { x: '15%', y: '45%' },
-    { x: '15%', y: '35%' },
-    { x: '25%', y: '35%' },
-    { x: '25%', y: '50%' },
-    { x: '35%', y: '50%' },
-  ],
-  // Path 3: From right to LED (RX) - S-curve
-  [
-    { x: '95%', y: '30%' },
-    { x: '85%', y: '30%' },
-    { x: '85%', y: '25%' },
-    { x: '75%', y: '25%' },
-    { x: '75%', y: '20%' },
-    { x: '70%', y: '20%' },
-  ],
-  // Path 4: From microprocessor to LED (TX) - diagonal with jog
-  [
-    { x: '65%', y: '50%' },
-    { x: '68%', y: '55%' },
-    { x: '72%', y: '55%' },
-    { x: '75%', y: '60%' },
-    { x: '80%', y: '60%' },
-    { x: '80%', y: '65%' },
-    { x: '85%', y: '65%' },
-  ],
-  // Path 5: From crystal to microprocessor
-  [
-    { x: '30%', y: '15%' },
-    { x: '30%', y: '25%' },
-    { x: '40%', y: '25%' },
-    { x: '40%', y: '45%' },
-  ],
-  // Path 6: From MOSFET to electrolytic capacitor
-  [
-    { x: '12%', y: '60%' },
-    { x: '12%', y: '70%' },
-    { x: '20%', y: '70%' },
-    { x: '20%', y: '75%' },
-    { x: '25%', y: '75%' },
-  ],
-  // Path 7: From microcontroller to RGB LED
-  [
-    { x: '78%', y: '40%' },
-    { x: '85%', y: '40%' },
-    { x: '85%', y: '45%' },
-    { x: '90%', y: '45%' },
-    { x: '90%', y: '52%' },
-  ],
-  // Path 8: From IC to microcontroller
-  [
-    { x: '60%', y: '25%' },
-    { x: '65%', y: '25%' },
-    { x: '65%', y: '30%' },
-    { x: '70%', y: '30%' },
-    { x: '70%', y: '40%' },
-  ]
-];
-
-// Define path colors with a theme
-const PATH_COLORS = {
-  data: 'rgba(60, 100, 180, 0.7)',
-  power: 'rgba(180, 60, 60, 0.7)',
-  ground: 'rgba(60, 60, 60, 0.7)',
-  signal: 'rgba(60, 180, 60, 0.7)',
-  control: 'rgba(180, 180, 60, 0.7)',
-  analog: 'rgba(180, 60, 180, 0.7)'
-};
-
-// Assign specific themes to paths
-const PATH_THEMES = [
-  PATH_COLORS.power,     // Path 1
-  PATH_COLORS.ground,    // Path 2
-  PATH_COLORS.signal,    // Path 3
-  PATH_COLORS.signal,    // Path 4
-  PATH_COLORS.control,   // Path 5
-  PATH_COLORS.power,     // Path 6
-  PATH_COLORS.data,      // Path 7
-  PATH_COLORS.control    // Path 8
-];
-
-// Pulse colors corresponding to path themes
-const PULSE_COLORS = [
-  'rgba(255, 100, 100, 0.9)',  // Power - red
-  'rgba(100, 100, 100, 0.9)',  // Ground - gray
-  'rgba(100, 255, 100, 0.9)',  // Signal - green
-  'rgba(255, 100, 100, 0.9)',  // Signal - red
-  'rgba(255, 255, 100, 0.9)',  // Control - yellow
-  'rgba(255, 100, 100, 0.9)',  // Power - red
-  'rgba(100, 100, 255, 0.9)',  // Data - blue
-  'rgba(255, 255, 100, 0.9)'   // Control - yellow
-];
-
-interface Point {
-  x: string;
-  y: string;
-}
-
-interface Pulse {
-  id: number;
-  pathIndex: number;
-  position: number; // 0-1 value representing position along the path
-  size: string;
-}
-
 interface LEDState {
   rxActive: boolean;
   txActive: boolean;
@@ -542,7 +368,6 @@ interface LEDState {
 }
 
 const PCBCircuit = () => {
-  const [pulses, setPulses] = useState<Pulse[]>([]);
   const [ledStates, setLedStates] = useState<LEDState>({
     rxActive: false,
     txActive: false,
@@ -553,67 +378,6 @@ const PCBCircuit = () => {
   
   const microprocessorControls = useAnimation();
   const microcontrollerControls = useAnimation();
-  const requestRef = useRef<number | undefined>(undefined);
-  
-  // Helper to convert percentage string to numeric value
-  const percentToValue = (percent: string): number => {
-    return parseFloat(percent.replace('%', ''));
-  };
-  
-  // Get point along path based on position (0-1)
-  const getPointAlongPath = (path: Point[], position: number): { x: number; y: number } => {
-    // Determine which segment we're on
-    const numSegments = path.length - 1;
-    const segmentLength = 1 / numSegments;
-    const currentSegment = Math.min(Math.floor(position / segmentLength), numSegments - 1);
-    const segmentPosition = (position - currentSegment * segmentLength) / segmentLength;
-    
-    // Get the points for the current segment
-    const start = path[currentSegment];
-    const end = path[currentSegment + 1];
-    
-    // Interpolate between the points
-    const startX = percentToValue(start.x);
-    const startY = percentToValue(start.y);
-    const endX = percentToValue(end.x);
-    const endY = percentToValue(end.y);
-    
-    return {
-      x: startX + (endX - startX) * segmentPosition,
-      y: startY + (endY - startY) * segmentPosition
-    };
-  };
-  
-  // Animation loop
-  const animatePulses = () => {
-    setPulses(prev => prev.map(pulse => {
-      const newPosition = pulse.position + 0.003;
-      
-      // If pulse completes a path
-      if (newPosition >= 1) {
-        // Trigger LED effects when pulse reaches end
-        if (pulse.pathIndex === 2) {
-          setLedStates(prev => ({ ...prev, rxActive: true }));
-        }
-        if (pulse.pathIndex === 3) {
-          setLedStates(prev => ({ ...prev, txActive: true }));
-        }
-        if (pulse.pathIndex === 6) {
-          setLedStates(prev => ({ ...prev, dataActive: true }));
-        }
-        if (pulse.pathIndex === 7) {
-          setLedStates(prev => ({ ...prev, statusActive: true }));
-        }
-        
-        // Remove this pulse
-        return { ...pulse, position: 1.1 }; 
-      }
-      
-      return { ...pulse, position: newPosition };
-    }).filter(pulse => pulse.position <= 1.1));
-    
-    requestRef.current = requestAnimationFrame(animatePulses);
-  };
   
   useEffect(() => {
     // Start microprocessor subtle pulsing animation
@@ -646,193 +410,48 @@ const PCBCircuit = () => {
       }
     });
     
-    // Start animation loop
-    requestRef.current = requestAnimationFrame(animatePulses);
-    
-    // Generate new pulses periodically
-    const pulseInterval = setInterval(() => {
-      // Create a new pulse on a random path
-      const pathIndex = Math.floor(Math.random() * CIRCUIT_PATHS.length);
+    // Blink LED animation - simulate random activity
+    const ledInterval = setInterval(() => {
+      const randomLED = Math.floor(Math.random() * 4);
       
-      setPulses(prev => [...prev, {
-        id: Date.now(),
-        pathIndex,
-        position: 0,
-        size: '4px',
-      }]);
-      
-      // Turn off LED after a delay when pulse completes
-      setTimeout(() => {
-        if (pathIndex === 2) {
-          setLedStates(prev => ({ ...prev, rxActive: false }));
-        }
-        if (pathIndex === 3) {
-          setLedStates(prev => ({ ...prev, txActive: false }));
-        }
-        if (pathIndex === 6) {
-          setLedStates(prev => ({ ...prev, dataActive: false }));
-        }
-        if (pathIndex === 7) {
-          setLedStates(prev => ({ ...prev, statusActive: false }));
-        }
-      }, 2000);
-      
-    }, 1500);
+      switch (randomLED) {
+        case 0:
+          setLedStates(prev => ({ ...prev, rxActive: true }));
+          setTimeout(() => {
+            setLedStates(prev => ({ ...prev, rxActive: false }));
+          }, 1000);
+          break;
+        case 1:
+          setLedStates(prev => ({ ...prev, txActive: true }));
+          setTimeout(() => {
+            setLedStates(prev => ({ ...prev, txActive: false }));
+          }, 1000);
+          break;
+        case 2:
+          setLedStates(prev => ({ ...prev, dataActive: true }));
+          setTimeout(() => {
+            setLedStates(prev => ({ ...prev, dataActive: false }));
+          }, 1000);
+          break;
+        case 3:
+          setLedStates(prev => ({ ...prev, statusActive: true }));
+          setTimeout(() => {
+            setLedStates(prev => ({ ...prev, statusActive: false }));
+          }, 1000);
+          break;
+        default:
+          break;
+      }
+    }, 2000);
     
     return () => {
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current);
-      }
-      clearInterval(pulseInterval);
+      clearInterval(ledInterval);
     };
   }, []);
-  
-  // Generate circuit traces based on paths
-  const renderCircuitTraces = () => {
-    const traces: ReactElement[] = [];
-    const vias: ReactElement[] = [];
-    const corners: ReactElement[] = [];
-
-    CIRCUIT_PATHS.forEach((path, pathIndex) => {
-      const pathColor = PATH_THEMES[pathIndex] || PATH_COLORS.ground;
-      
-      // For each segment in the path
-      for (let i = 0; i < path.length - 1; i++) {
-        const start = path[i];
-        const end = path[i + 1];
-        
-        // Determine if this is horizontal, vertical, or diagonal
-        const isHorizontal = start.y === end.y;
-        const isVertical = start.x === end.x;
-        
-        if (isHorizontal || isVertical) {
-          // Straight trace
-          const left = isHorizontal ? start.x : Math.min(percentToValue(start.x), percentToValue(end.x)) + '%';
-          const top = isHorizontal ? start.y : Math.min(percentToValue(start.y), percentToValue(end.y)) + '%';
-          const width = isHorizontal ? 
-            Math.abs(percentToValue(end.x) - percentToValue(start.x)) + '%' : 
-            '2px';
-          const height = isHorizontal ? 
-            '2px' : 
-            Math.abs(percentToValue(end.y) - percentToValue(start.y)) + '%';
-          
-          traces.push(
-            <CircuitTrace 
-              key={`trace-${pathIndex}-${i}`}
-              $width={width}
-              $height={height}
-              $top={top}
-              $left={left}
-              $color={pathColor}
-            />
-          );
-        } else {
-          // Diagonal trace - we'll use multiple segments to create this
-          const startX = percentToValue(start.x);
-          const startY = percentToValue(start.y);
-          const endX = percentToValue(end.x);
-          const endY = percentToValue(end.y);
-          
-          // Calculate the angle
-          const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
-          
-          // Calculate the length
-          const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
-          
-          traces.push(
-            <CircuitTrace 
-              key={`diagonal-${pathIndex}-${i}`}
-              $width={`${length}%`}
-              $height="2px"
-              $top={`${startY}%`}
-              $left={`${startX}%`}
-              $rotate={`${angle}deg`}
-              $color={pathColor}
-              style={{ transformOrigin: 'left center' }}
-            />
-          );
-        }
-        
-        // Add vias at corners/intersections (except at endpoints)
-        if (i > 0 && i < path.length - 1) {
-          vias.push(
-            <Via 
-              key={`via-${pathIndex}-${i}`}
-              $top={`calc(${path[i].y} - 3px)`}
-              $left={`calc(${path[i].x} - 3px)`}
-              $color={pathColor}
-            />
-          );
-        }
-        
-        // For consecutive segments that form a corner, add rounded corner caps
-        if (i < path.length - 2) {
-          const current = path[i];
-          const next = path[i + 1];
-          const afterNext = path[i + 2];
-          
-          // Check if this is a corner (change in both x and y direction)
-          const isCornerX = next.x !== current.x && next.x !== afterNext.x;
-          const isCornerY = next.y !== current.y && next.y !== afterNext.y;
-          
-          if (isCornerX && isCornerY) {
-            corners.push(
-              <CircuitTrace
-                key={`corner-${pathIndex}-${i}`}
-                $width="4px"
-                $height="4px"
-                $top={`calc(${next.y} - 2px)`}
-                $left={`calc(${next.x} - 2px)`}
-                $color={pathColor}
-                $radius="2px"
-              />
-            );
-          }
-        }
-      }
-      
-      // Add a special curved trace in a few places for realism
-      if (pathIndex === 1 || pathIndex === 4 || pathIndex === 7) {
-        const curvePt = Math.floor(path.length / 2);
-        const x = percentToValue(path[curvePt].x);
-        const y = percentToValue(path[curvePt].y);
-        
-        // Add a curved segment
-        corners.push(
-          <CurvedTrace
-            key={`curve-${pathIndex}`}
-            $top={`${y - 2}%`}
-            $left={`${x - 2}%`}
-            $size="4%"
-            $borderStartAngle="0% 0%"
-            $borderEndAngle="100% 100%"
-            $color={pathColor}
-          />
-        );
-      }
-    });
-    
-    return [...traces, ...corners, ...vias];
-  };
   
   return (
     <PCBContainer>
       <PCBBoard>
-        {/* Circuit Traces */}
-        {renderCircuitTraces()}
-        
-        {/* Extra Vias across the board for realistic look */}
-        <Via $top="10%" $left="15%" />
-        <Via $top="15%" $left="40%" />
-        <Via $top="25%" $left="55%" />
-        <Via $top="35%" $left="75%" />
-        <Via $top="45%" $left="30%" />
-        <Via $top="60%" $left="55%" />
-        <Via $top="70%" $left="35%" />
-        <Via $top="80%" $left="65%" />
-        <Via $top="85%" $left="25%" />
-        <Via $top="55%" $left="85%" />
-        
         {/* Microprocessor */}
         <Microprocessor 
           $width="100px" 
@@ -923,6 +542,13 @@ const PCBCircuit = () => {
         <Inductor $width="30px" $height="15px" $top="20%" $left="45%" />
         <Inductor $width="30px" $height="15px" $top="15%" $left="60%" />
         
+        {/* Add more components in different locations */}
+        <Resistor $width="35px" $height="15px" $top="85%" $left="70%" $rotate="30deg" />
+        <SMDResistor $width="15px" $height="8px" $top="18%" $left="80%" />
+        <Capacitor $width="18px" $height="18px" $top="90%" $left="20%" />
+        <Transistor $width="18px" $height="18px" $top="10%" $left="45%" />
+        <ICChip $width="60px" $height="25px" $top="50%" $left="15%" $rotate="90deg" />
+        
         {/* LEDs */}
         <LED 
           $size="8px" 
@@ -1000,28 +626,6 @@ const PCBCircuit = () => {
             borderRadius: '50%'
           }} />
         </RGBLED>
-        
-        {/* Electrical Pulses traveling along the circuit */}
-        {pulses.map(pulse => {
-          const path = CIRCUIT_PATHS[pulse.pathIndex];
-          const { x, y } = getPointAlongPath(path, pulse.position);
-          const pulseColor = PULSE_COLORS[pulse.pathIndex] || 'rgba(79, 143, 255, 0.9)';
-          
-          return (
-            <PulsePath key={pulse.id}>
-              <ElectricalPulse
-                $size={pulse.size}
-                $color={pulseColor}
-                style={{
-                  left: `calc(${x}% - 2px)`,
-                  top: `calc(${y}% - 2px)`,
-                }}
-                initial={{ opacity: 0.3 }}
-                animate={{ opacity: 1 }}
-              />
-            </PulsePath>
-          );
-        })}
       </PCBBoard>
     </PCBContainer>
   );

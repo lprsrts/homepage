@@ -1,8 +1,8 @@
-import { TypeAnimation } from 'react-type-animation'
-import styled from 'styled-components'
 import { motion } from 'framer-motion'
+import styled from 'styled-components'
 import './App.css'
 import PCBCircuit from './components/PCBCircuit'
+import Terminal from './components/Terminal'
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -20,31 +20,6 @@ const HeroSection = styled.div`
   height: 80vh;
   padding: 0 2rem;
   text-align: center;
-`
-
-const Title = styled.h1`
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-`
-
-const Subtitle = styled.div`
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  color: #bebebe;
-`
-
-const TypedContent = styled.div`
-  font-size: 1.25rem;
-  line-height: 1.8;
-  padding: 1.5rem;
-  background-color: rgba(30, 30, 30, 0.7);
-  border-radius: 8px;
-  border-left: 4px solid #4f8fff;
-  max-width: 700px;
-  text-align: left;
-  font-family: 'Fira Code', monospace;
-  margin-bottom: 3rem;
 `
 
 const Menu = styled.div`
@@ -101,32 +76,36 @@ const SiteDescription = styled.p`
 `
 
 function App() {
+  // Define the terminal commands and outputs
+  const terminalCommands = [
+    "whoami",
+    "cat about.md",
+    "ls -l skills/",
+    "cat contact.sh"
+  ];
+  
+  const terminalOutputs = [
+    "Alper Saritas\nEngineer & Developer",
+    "# About Me\n\nHey there! I'm a dude based in Germany. I build things that live both in the digital and physical worlds.",
+    "-rw-r--r--  1 alper  staff   102 May  1 2025 coding.json\n-rw-r--r--  1 alper  staff    82 May  1 2025 engineering.txt",
+    "#!/bin/bash\n\necho \"Email: alper@saritas.net.tr\"\necho \"GitHub: github.com/lprsrts\"\necho \"LinkedIn: linkedin.com/in/mehmetalpersaritas\"\n\nexit 0"
+  ];
+
   return (
     <AppContainer>
-      {/* Replace the old ElectricalCircuit with our new PCBCircuit component */}
       <PCBCircuit />
 
       <HeroSection>
-        <Title>Alper Saritas</Title>
-        <Subtitle>Electrical Engineer & Developer</Subtitle>
-        
-        <TypedContent>
-          <TypeAnimation
-            sequence={[
-              "// Hello, I'm Alper\nconst skills = {\n  coding: ['JavaScript', 'TypeScript', 'React'],\n  engineering: ['Electrical', 'Circuit Design'],\n  interests: ['Innovation', 'Problem Solving']\n};",
-              2000,
-              "// Hello, I'm Alper\nconst skills = {\n  coding: ['JavaScript', 'TypeScript', 'React'],\n  engineering: ['Electrical', 'Circuit Design'],\n  interests: ['Innovation', 'Problem Solving']\n};\n\n// Welcome to my digital space",
-              1000,
-            ]}
-            speed={50}
-            style={{ whiteSpace: 'pre-line' }}
-            repeat={Infinity}
-          />
-        </TypedContent>
+        <Terminal
+          commands={terminalCommands}
+          outputs={terminalOutputs}
+          typingSpeed={50}
+          initialDelay={500}
+        />
       </HeroSection>
 
       <Menu>
-        <MenuTitle>My Projects</MenuTitle>
+        <MenuTitle>README.md</MenuTitle>
         <SiteGrid>
           <SiteCard 
             href="https://meditations.alpersaritas.com" 
@@ -147,7 +126,7 @@ function App() {
           >
             <SiteTitle>Engineering Blog</SiteTitle>
             <SiteDescription>
-              Coming soon! Technical articles and insights about electrical engineering and circuit design.
+              Coming soon! Technical articles and insights about engineering.
             </SiteDescription>
           </SiteCard>
           
