@@ -1,0 +1,91 @@
+#root {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container {
+  padding: 2rem;
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .container {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+}
+
+/* Animation for the circuit background */
+@keyframes pulse {
+  0% {
+    opacity: 0.2;
+    box-shadow: 0 0 5px rgba(79, 143, 255, 0.3);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 10px rgba(79, 143, 255, 0.6);
+  }
+  100% {
+    opacity: 0.2;
+    box-shadow: 0 0 5px rgba(79, 143, 255, 0.3);
+  }
+}
+
+/* Animation for typing cursor */
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 10px;
+  height: 1.2em;
+  background-color: #4f8fff;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
