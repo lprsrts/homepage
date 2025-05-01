@@ -137,12 +137,11 @@ function App() {
           >
             <SiteTitle>Meditations</SiteTitle>
             <SiteDescription>
-              A collection of daily meditations and reflections to help you find peace and clarity in your everyday life.
+              A collection of daily meditations and reflections in my native language.
             </SiteDescription>
           </SiteCard>
           
           <SiteCard 
-            href="#" 
             whileHover={{ y: -5 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
@@ -153,7 +152,6 @@ function App() {
           </SiteCard>
           
           <SiteCard 
-            href="#" 
             whileHover={{ y: -5 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
