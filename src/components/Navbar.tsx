@@ -98,6 +98,10 @@ const NavLink = styled(motion.a)`
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme }) => {
   const [] = useState(false);
   
+  const navigateToMeditations = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.href = "https://meditations.alpersaritas.com";
+  };
   
   return (
     <NavContainer>
@@ -105,7 +109,8 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme }) => {
       
       <NavLinks>
         <NavLink 
-          href="https://meditations.alpersaritas.com" 
+          href="https://meditations.alpersaritas.com"
+          onClick={navigateToMeditations}
           whileHover={{ y: -2 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
