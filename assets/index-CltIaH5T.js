@@ -241,7 +241,7 @@ Error generating stack: `+n.message+`
       width: 0;
     }
   }
-`,eD=({isDarkMode:a,toggleTheme:i})=>($.useState(!1),J.jsxs(WM,{children:[J.jsx(IM,{children:"Alper Saritas • Home"}),J.jsxs(tD,{children:[J.jsx(_c,{href:"https://meditations.alpersaritas.com",whileHover:{y:-2},transition:{type:"spring",stiffness:300},children:"Meditations"}),J.jsx(_c,{className:"coming-soon",children:"Engineering Blog"}),J.jsx(_c,{className:"coming-soon",children:"Code Lab"}),J.jsx($M,{isDarkMode:a,toggleTheme:i})]})]})),nD=Mt.div`
+`,eD=({isDarkMode:a,toggleTheme:i})=>{$.useState(!1);const s=r=>{r.preventDefault(),window.location.href="https://meditations.alpersaritas.com"};return J.jsxs(WM,{children:[J.jsx(IM,{children:"Alper Saritas • Home"}),J.jsxs(tD,{children:[J.jsx(_c,{href:"https://meditations.alpersaritas.com",onClick:s,whileHover:{y:-2},transition:{type:"spring",stiffness:300},children:"Meditations"}),J.jsx(_c,{className:"coming-soon",children:"Engineering Blog"}),J.jsx(_c,{className:"coming-soon",children:"Code Lab"}),J.jsx($M,{isDarkMode:a,toggleTheme:i})]})]})},nD=Mt.div`
   min-height: 100vh;
   position: relative;
   font-family: var(--font-ui);
@@ -300,7 +300,7 @@ Error generating stack: `+n.message+`
   font-size: 0.9rem;
   color: var(--card-text);
   line-height: 1.5;
-`;function rD(){const[a,i]=$.useState(!0),s=()=>{i(h=>!h),a?document.documentElement.removeAttribute("data-theme"):document.documentElement.setAttribute("data-theme","dark")};$.useEffect(()=>{const h=window.matchMedia("(prefers-color-scheme: dark)").matches;i(h),h&&document.documentElement.setAttribute("data-theme","dark")},[]);const r=["whoami","cat about.md","ls -l skills/","cat contact.sh"],c=[`Alper Saritas
+`;function rD(){const[a,i]=$.useState(!0);$.useEffect(()=>{const h=localStorage.getItem("theme");if(h){const f=h==="dark";i(f),f?document.documentElement.setAttribute("data-theme","dark"):document.documentElement.removeAttribute("data-theme")}else{const f=window.matchMedia("(prefers-color-scheme: dark)").matches;i(f),f&&document.documentElement.setAttribute("data-theme","dark")}},[]);const s=()=>{i(h=>{const f=!h;return localStorage.setItem("theme",f?"dark":"light"),f?document.documentElement.setAttribute("data-theme","dark"):document.documentElement.removeAttribute("data-theme"),f})},r=["whoami","cat about.md","ls -l skills/","cat contact.sh"],c=[`Alper Saritas
 Engineer & Developer`,`# About Me
 
 Hey there! I'm a dude based in Germany. I build things that live both in the digital and physical worlds.`,`-rw-r--r--  1 alper  staff   102 May  1 2025 coding.json
