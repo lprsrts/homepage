@@ -96,11 +96,8 @@ const NavLink = styled(motion.a)`
 
 
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [] = useState(false);
   
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(prev => !prev);
-  };
   
   return (
     <NavContainer>
