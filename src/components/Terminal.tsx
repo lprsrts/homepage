@@ -3,10 +3,10 @@ import styled from 'styled-components'
 
 const TerminalContainer = styled.div`
   font-family: 'Fira Code', monospace;
-  background-color: rgba(20, 20, 20, 0.9);
+  background-color: var(--color-dark);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px var(--shadow-color);
   width: 100%;
   max-width: 700px;
   margin-bottom: 3rem;
@@ -16,7 +16,7 @@ const TerminalContainer = styled.div`
 `;
 
 const TerminalHeader = styled.div`
-  background-color: #333;
+  background-color: var(--color-medium);
   padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
@@ -24,7 +24,7 @@ const TerminalHeader = styled.div`
 `;
 
 const TerminalTitle = styled.div`
-  color: #ddd;
+  color: var(--color-light);
   font-size: 0.9rem;
 `;
 
@@ -42,25 +42,25 @@ const TerminalButton = styled.div<{ $color: string }>`
 
 const TerminalBody = styled.div`
   padding: 1rem;
-  color: #f1f1f1;
+  color: var(--color-light);
   overflow-y: auto;
   white-space: pre-wrap;
   line-height: 1.6;
   flex-grow: 1;
   font-size: 0.95rem;
   scrollbar-width: thin;
-  scrollbar-color: #555 #222;
+  scrollbar-color: var(--color-neutral) var(--color-dark);
   
   &::-webkit-scrollbar {
     width: 8px;
   }
   
   &::-webkit-scrollbar-track {
-    background: #222;
+    background: var(--color-dark);
   }
   
   &::-webkit-scrollbar-thumb {
-    background-color: #555;
+    background-color: var(--color-neutral);
     border-radius: 4px;
   }
 `;
@@ -72,7 +72,7 @@ const TerminalLine = styled.div`
 `;
 
 const TerminalPrompt = styled.span`
-  color: #4f8fff;
+  color: var(--accent-color);
   margin-right: 8px;
   white-space: nowrap;
   flex-shrink: 0;
@@ -87,7 +87,7 @@ const TerminalCursor = styled.span`
   display: inline-block;
   width: 8px;
   height: 1.1em;
-  background-color: #f1f1f1;
+  background-color: var(--color-light);
   margin-left: 2px;
   animation: blink 1s step-end infinite;
 
@@ -99,7 +99,7 @@ const TerminalCursor = styled.span`
 
 const TerminalOutput = styled.div`
   margin-bottom: 1rem;
-  color: #ddd;
+  color: var(--color-light);
   text-align: left;
 `;
 
