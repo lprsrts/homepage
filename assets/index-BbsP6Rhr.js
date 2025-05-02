@@ -241,7 +241,7 @@ Error generating stack: `+n.message+`
       width: 0;
     }
   }
-`,eD=({isDarkMode:a,toggleTheme:i})=>($.useState(!1),J.jsxs(WM,{children:[J.jsx(IM,{children:"Alper Saritas • Home"}),J.jsxs(tD,{children:[J.jsx(_c,{href:"https://meditations.alpersaritas.com",target:"_blank",rel:"noopener noreferrer",whileHover:{y:-2},transition:{type:"spring",stiffness:300},children:"Meditations"}),J.jsx(_c,{className:"coming-soon",children:"Engineering Blog"}),J.jsx(_c,{className:"coming-soon",children:"Code Lab"}),J.jsx($M,{isDarkMode:a,toggleTheme:i})]})]})),nD=Mt.div`
+`,eD=({isDarkMode:a,toggleTheme:i})=>($.useState(!1),J.jsxs(WM,{children:[J.jsx(IM,{children:"Alper Saritas • Home"}),J.jsxs(tD,{children:[J.jsx(_c,{href:"https://meditations.alpersaritas.com",whileHover:{y:-2},transition:{type:"spring",stiffness:300},children:"Meditations"}),J.jsx(_c,{className:"coming-soon",children:"Engineering Blog"}),J.jsx(_c,{className:"coming-soon",children:"Code Lab"}),J.jsx($M,{isDarkMode:a,toggleTheme:i})]})]})),nD=Mt.div`
   min-height: 100vh;
   position: relative;
   font-family: var(--font-ui);
