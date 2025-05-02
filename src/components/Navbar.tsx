@@ -96,8 +96,11 @@ const NavLink = styled(motion.a)`
 
 
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme }) => {
-  const [] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(prev => !prev);
+  };
   
   return (
     <NavContainer>
@@ -106,8 +109,6 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme }) => {
       <NavLinks>
         <NavLink 
           href="https://meditations.alpersaritas.com" 
-          target="_blank" 
-          rel="noopener noreferrer"
           whileHover={{ y: -2 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
