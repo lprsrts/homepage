@@ -87,26 +87,49 @@ function App() {
   // State for dark/light mode toggle
   const [isDarkMode, setIsDarkMode] = useState(true);
   
-  // Toggle theme function
-  const toggleTheme = () => {
-    setIsDarkMode(prev => !prev);
-    // Add or remove data-theme attribute to enable CSS variable switching
-    if (!isDarkMode) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
-  };
-  
-  // Set initial theme based on user preference
+  // Set initial theme based on localStorage or user preference
   useEffect(() => {
-    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setIsDarkMode(prefersDarkMode);
-    if (prefersDarkMode) {
-      document.documentElement.setAttribute('data-theme', 'dark');
+    // First check localStorage for a saved preference
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme) {
+      // Use the saved preference
+      const isDark = savedTheme === 'dark';
+      setIsDarkMode(isDark);
+      if (isDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+    } else {
+      // If no saved preference, use system preference
+      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setIsDarkMode(prefersDarkMode);
+      if (prefersDarkMode) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
     }
   }, []);
 
+  // Toggle theme function
+  const toggleTheme = () => {
+    setIsDarkMode(prev => {
+      const newMode = !prev;
+      
+      // Save to localStorage
+      localStorage.setItem('theme', newMode ? 'dark' : 'light');
+      
+      // Update data-theme attribute
+      if (newMode) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+      
+      return newMode;
+    });
+  };
+  
   // Terminal commands and outputs
   const terminalCommands = [
     "whoami",
