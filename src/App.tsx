@@ -21,11 +21,29 @@ const HeroSection = styled.div`
   min-height: 100vh;
   padding: 6rem 2rem 2rem;
   text-align: center;
+  
+  @media (max-width: 768px) {
+    padding: 5rem 1.5rem 1.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 4rem 1rem 1rem;
+  }
 `;
 
 const ContentSection = styled.div`
   padding: 2rem;
   margin-bottom: 4rem;
+  
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -35,6 +53,11 @@ const SectionTitle = styled.h2`
   color: var(--accent-color);
   text-align: center;
   font-weight: 500;
+  
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
 `;
 
 const ProjectsGrid = styled.div`
@@ -43,6 +66,16 @@ const ProjectsGrid = styled.div`
   gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.2rem;
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 `;
 
 const ProjectCard = styled(motion.div)`
@@ -59,6 +92,10 @@ const ProjectCard = styled(motion.div)`
     transform: translateY(-5px);
     box-shadow: 0 10px 20px var(--shadow-color-hover);
     border-color: var(--accent-color);
+  }
+  
+  @media (max-width: 480px) {
+    padding: 1.2rem;
   }
 `;
 

@@ -13,6 +13,17 @@ const TerminalContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 400px;
+  
+  @media (max-width: 768px) {
+    height: 350px;
+    width: 95%;
+  }
+  
+  @media (max-width: 480px) {
+    height: 300px;
+    width: 95%;
+    margin-bottom: 2rem;
+  }
 `;
 
 const TerminalHeader = styled.div`
@@ -26,6 +37,10 @@ const TerminalHeader = styled.div`
 const TerminalTitle = styled.div`
   color: var(--color-light);
   font-size: 0.9rem;
+  
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+  }
 `;
 
 const TerminalButtons = styled.div`
@@ -38,6 +53,11 @@ const TerminalButton = styled.div<{ $color: string }>`
   height: 12px;
   border-radius: 50%;
   background-color: ${props => props.$color};
+  
+  @media (max-width: 480px) {
+    width: 10px;
+    height: 10px;
+  }
 `;
 
 const TerminalBody = styled.div`
@@ -50,6 +70,17 @@ const TerminalBody = styled.div`
   font-size: 0.95rem;
   scrollbar-width: thin;
   scrollbar-color: var(--color-neutral) var(--color-dark);
+  
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
   
   &::-webkit-scrollbar {
     width: 8px;
@@ -69,6 +100,10 @@ const TerminalLine = styled.div`
   display: flex;
   margin-bottom: 0.5rem;
   flex-wrap: wrap;
+  
+  @media (max-width: 480px) {
+    margin-bottom: 0.3rem;
+  }
 `;
 
 const TerminalPrompt = styled.span`
@@ -76,6 +111,11 @@ const TerminalPrompt = styled.span`
   margin-right: 8px;
   white-space: nowrap;
   flex-shrink: 0;
+  
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+    margin-right: 6px;
+  }
 `;
 
 const TerminalContent = styled.span`
@@ -90,10 +130,9 @@ const TerminalCursor = styled.span`
   background-color: var(--color-light);
   margin-left: 2px;
   animation: blink 1s step-end infinite;
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+  
+  @media (max-width: 480px) {
+    width: 6px;
   }
 `;
 
@@ -101,6 +140,10 @@ const TerminalOutput = styled.div`
   margin-bottom: 1rem;
   color: var(--color-light);
   text-align: left;
+  
+  @media (max-width: 480px) {
+    margin-bottom: 0.7rem;
+  }
 `;
 
 interface TerminalProps {
@@ -129,8 +172,19 @@ const Terminal: React.FC<TerminalProps> = ({
   const [currentStep, setCurrentStep] = useState(AnimationStep.WAITING);
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   
   const terminalBodyRef = useRef<HTMLDivElement>(null);
+  
+  // Handle window resize for mobile detection
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Handle the animation sequence
   useEffect(() => {
@@ -222,8 +276,11 @@ const Terminal: React.FC<TerminalProps> = ({
     }
   }, [lines, currentLine]);
 
+  // Render a shorter prompt on mobile devices
   const renderPrompt = () => (
-    <TerminalPrompt>alpersaritas@MacBook: ~/portfolio$</TerminalPrompt>
+    <TerminalPrompt>
+      {isMobile ? '$ ' : 'alpersaritas@MacBook: ~/portfolio$ '}
+    </TerminalPrompt>
   );
 
   return (
@@ -234,7 +291,9 @@ const Terminal: React.FC<TerminalProps> = ({
           <TerminalButton $color="#ffbd2e" />
           <TerminalButton $color="#27c93f" />
         </TerminalButtons>
-        <TerminalTitle>alpersaritas@MacBook: ~/portfolio</TerminalTitle>
+        <TerminalTitle>
+          {isMobile ? '~/portfolio' : 'alpersaritas@MacBook: ~/portfolio'}
+        </TerminalTitle>
         <div></div>
       </TerminalHeader>
       <TerminalBody ref={terminalBodyRef}>

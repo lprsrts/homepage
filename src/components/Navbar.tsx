@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import ThemeToggle from './ThemeToggle';
 
@@ -34,6 +34,10 @@ const Logo = styled.div`
   font-size: 1.2rem;
   color: var(--text-color);
   transition: color 0.3s ease;
+  
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 const NavLinks = styled.div`
@@ -47,6 +51,10 @@ const NavLinks = styled.div`
   
   @media (max-width: 480px) {
     gap: 0.5rem;
+  }
+  
+  @media (max-width: 650px) {
+    display: none; /* Hide on mobile */
   }
 `;
 
@@ -94,19 +102,101 @@ const NavLink = styled(motion.a)`
   }
 `;
 
+const MobileNavButton = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 20;
+  
+  @media (max-width: 650px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+const MobileMenu = styled(motion.div)`
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--navbar-bg);
+  backdrop-filter: blur(15px);
+  z-index: 15;
+  padding: 5rem 2rem 2rem;
+  flex-direction: column;
+  
+  @media (max-width: 650px) {
+    display: flex;
+  }
+`;
+
+const MobileNavList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2rem;
+`;
+
+const MobileNavLink = styled(NavLink)`
+  font-size: 1.2rem;
+`;
+
+const ThemeToggleWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+`;
 
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme }) => {
-  const [] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // Close mobile menu when screen size increases beyond mobile breakpoint
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 650) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+  // Prevent body scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+  
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(prev => !prev);
+  };
   
   const navigateToMeditations = (e: React.MouseEvent) => {
     e.preventDefault();
     window.location.href = "https://meditations.alpersaritas.com";
+    setIsMobileMenuOpen(false);
   };
   
   return (
     <NavContainer>
       <Logo>Alper Saritas • Home</Logo>
       
+      {/* Desktop navigation */}
       <NavLinks>
         <NavLink 
           href="https://meditations.alpersaritas.com"
@@ -131,6 +221,50 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme }) => {
         
         <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       </NavLinks>
+      
+      {/* Mobile menu button */}
+      <MobileNavButton onClick={toggleMobileMenu}>
+        {isMobileMenuOpen ? '✕' : '☰'}
+      </MobileNavButton>
+      
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <MobileMenu
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+          >
+            <MobileNavList>
+              <MobileNavLink 
+                href="https://meditations.alpersaritas.com"
+                onClick={navigateToMeditations}
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                Meditations
+              </MobileNavLink>
+              
+              <MobileNavLink 
+                className="coming-soon"
+              >
+                Engineering Blog
+              </MobileNavLink>
+              
+              <MobileNavLink 
+                className="coming-soon"
+              >
+                Code Lab
+              </MobileNavLink>
+            </MobileNavList>
+            
+            <ThemeToggleWrapper>
+              <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+            </ThemeToggleWrapper>
+          </MobileMenu>
+        )}
+      </AnimatePresence>
     </NavContainer>
   );
 };
