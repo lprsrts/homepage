@@ -1,0 +1,70 @@
+import Link from "next/link";
+
+export default function Home() {
+  return (
+    <main className="min-h-screen flex items-center justify-center p-6">
+      <div className="text-center max-w-2xl">
+        {/* Profile Picture */}
+        <div className="mb-8">
+          <div className="w-32 h-32 mx-auto rounded-full border-2 border-black bg-gray-200 overflow-hidden">
+            {/* Replace with your actual image at public/profile.jpg */}
+          </div>
+        </div>
+
+        {/* Name */}
+        <h1 className="text-4xl font-bold mb-2">Alper Saritas</h1>
+        <p className="text-lg mb-12 text-gray-600">Developer & Creator</p>
+
+        {/* Navigation Links */}
+        <nav className="space-y-3 mb-12">
+          <Link href="/blog" className="block nav-link">
+            Blog
+          </Link>
+          <Link href="/meditations" className="block nav-link">
+            Meditations
+          </Link>
+          <Link href="/projects" className="block nav-link">
+            Projects
+          </Link>
+          <Link href="/updates" className="block nav-link">
+            Updates
+          </Link>
+          <Link href="/media" className="block nav-link">
+            Media
+          </Link>
+          <Link href="/shop" className="block nav-link">
+            Shop
+          </Link>
+        </nav>
+
+        {/* Social Links */}
+        <div className="flex justify-center gap-4 text-sm">
+          <a 
+            href="https://github.com/alpersaritas" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            GitHub
+          </a>
+          <span>•</span>
+          <a 
+            href="https://twitter.com/alpersaritas" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            Twitter
+          </a>
+          <span>•</span>
+          <a 
+            href="mailto:hello@alpersaritas.com"
+            className="hover:underline"
+          >
+            Email
+          </a>
+        </div>
+      </div>
+    </main>
+  );
+}
