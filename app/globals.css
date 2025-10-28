@@ -29,6 +29,9 @@
 }
 
 @layer components {
+    .profile-picture {
+        transition: all 0.2s ease;
+    }
     .nav-link {
         color: var(--color-shade-2);
         border: 1px solid var(--color-accent-2);

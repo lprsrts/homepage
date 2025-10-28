@@ -11,6 +11,7 @@ export default function Home() {
             lightImage="/pp_c16_g1p3_inv.png"
             darkImage="/pp_c16_g1p3.png"
             alt="Profile Picture"
+            version="2"
           />
         </div>
 

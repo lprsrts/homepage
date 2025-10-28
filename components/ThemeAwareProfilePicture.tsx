@@ -9,6 +9,7 @@ interface ThemeAwareProfilePictureProps {
   alt?: string;
   className?: string;
   size?: number;
+  version?: string;    // Cache-busting version string
 }
 
 export default function ThemeAwareProfilePicture({
@@ -17,6 +18,7 @@ export default function ThemeAwareProfilePicture({
   alt = "Profile Picture",
   className = "",
   size = 128,
+  version = "1",
 }: ThemeAwareProfilePictureProps) {
   const { currentPalette } = useTheme();
 
@@ -39,16 +41,18 @@ export default function ThemeAwareProfilePicture({
   };
 
   const imageSrc = isLightTheme() ? lightImage : darkImage;
+  const imageSrcWithVersion = `${imageSrc}?v=${version}`;
 
   return (
     <div className={`w-32 h-32 mx-auto overflow-hidden ${className}`}>
       <Image
-        src={imageSrc}
+        src={imageSrcWithVersion}
         alt={alt}
         width={size}
         height={size}
         className="w-full h-full object-cover"
         priority
+        unoptimized
       />
     </div>
   );
