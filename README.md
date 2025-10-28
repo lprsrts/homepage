@@ -2,6 +2,24 @@
 
 A minimal, monochromatic personal website built with Next.js 14, TypeScript, and Tailwind CSS.
 
+## 🎨 Use as Template
+
+This repository has a `template` branch that you can use to create your own website:
+
+```bash
+# Clone the template branch
+git clone -b template https://github.com/lprsrts/homepage.git my-website
+cd my-website
+
+# Install dependencies
+npm install
+
+# Start customizing!
+npm run dev
+```
+
+Or fork this repository and switch to the `template` branch to get started.
+
 ## Tech Stack
 
 - **Next.js 14**: React framework with App Router
