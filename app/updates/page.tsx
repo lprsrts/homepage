@@ -25,13 +25,13 @@ export default function Updates() {
       <Navigation />
       <main className="content-container">
         <h1 className="text-4xl font-bold mb-8">Updates</h1>
-        <p className="text-gray-600 mb-12">Recent activity and announcements.</p>
+        <p className="mb-12" style={{ color: "var(--color-muted)" }}>Recent activity and announcements.</p>
         
         <div className="space-y-6">
           {updates.map((update) => (
-            <div key={update.id} className="flex gap-6 pb-6 border-b border-gray-300">
-              <time className="text-sm text-gray-600 min-w-[100px]">{update.date}</time>
-              <p className="text-gray-800">{update.content}</p>
+            <div key={update.id} className="flex gap-6 pb-6 border-b" style={{ borderColor: "var(--color-border)" }}>
+              <time className="text-sm min-w-[100px]" style={{ color: "var(--color-muted)" }}>{update.date}</time>
+              <p>{update.content}</p>
             </div>
           ))}
         </div>

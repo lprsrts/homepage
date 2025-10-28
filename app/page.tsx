@@ -6,14 +6,17 @@ export default function Home() {
       <div className="text-center max-w-2xl">
         {/* Profile Picture */}
         <div className="mb-8">
-          <div className="w-32 h-32 mx-auto rounded-full border-2 border-black bg-gray-200 overflow-hidden">
+          <div 
+            className="w-32 h-32 mx-auto rounded-full border-2 overflow-hidden" 
+            style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-muted)" }}
+          >
             {/* Replace with your actual image at public/profile.jpg */}
           </div>
         </div>
 
         {/* Name */}
         <h1 className="text-4xl font-bold mb-2">Alper Saritas</h1>
-        <p className="text-lg mb-12 text-gray-600">Developer & Creator</p>
+        <p className="text-lg mb-12" style={{ color: "var(--color-muted)" }}>Developer & Creator</p>
 
         {/* Navigation Links */}
         <nav className="space-y-3 mb-12">
@@ -40,7 +43,7 @@ export default function Home() {
         {/* Social Links */}
         <div className="flex justify-center gap-4 text-sm">
           <a 
-            href="https://github.com/alpersaritas" 
+            href="https://github.com/lprsrts" 
             target="_blank" 
             rel="noopener noreferrer"
             className="hover:underline"
@@ -49,12 +52,12 @@ export default function Home() {
           </a>
           <span>•</span>
           <a 
-            href="https://twitter.com/alpersaritas" 
+            href="https://instagram.com/lprsrts" 
             target="_blank" 
             rel="noopener noreferrer"
             className="hover:underline"
           >
-            Twitter
+            Instagram
           </a>
           <span>•</span>
           <a 

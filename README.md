@@ -2,7 +2,7 @@
 
 A minimal, monochromatic personal website built with Next.js 14, TypeScript, and Tailwind CSS.
 
-## 🎨 Use as Template
+## Use as Template
 
 This repository has a `template` branch that you can use to create your own website:
 
@@ -10,22 +10,24 @@ This repository has a `template` branch that you can use to create your own webs
 # Clone the template branch
 git clone -b template https://github.com/lprsrts/homepage.git my-website
 cd my-website
-
-# Install dependencies
-npm install
-
-# Start customizing!
-npm run dev
 ```
 
 Or fork this repository and switch to the `template` branch to get started.
+
+## Features
+
+- **Monochromatic Design**: Clean black and white aesthetic
+- **Theme Switcher**: 8 pre-built themes (Default, Dark, Sepia, Forest, Ocean, Sunset, Midnight, Minimal Gray)
+- **Content Pages**: Blog, Meditations, Projects, Updates, Media, Shop
+- **Fully Responsive**: Mobile-friendly design
+- **Static Export**: Fast loading and easy hosting
 
 ## Tech Stack
 
 - **Next.js 14**: React framework with App Router
 - **TypeScript**: Type-safe development
 - **Tailwind CSS**: Utility-first styling
-- **Static Export**: Pre-rendered HTML for fast hosting
+- **CSS Variables**: Dynamic theming system
 
 ## Getting Started
 
@@ -72,6 +74,13 @@ For a full CMS, consider integrating:
 - Headless CMS (Contentful, Sanity, etc.)
 - Database (Postgres, MongoDB, etc.)
 
+### Customize Themes
+
+See `THEMES.md` for detailed information on:
+- Adding custom themes
+- Modifying existing themes
+- Using CSS variables in your components
+
 ## Deployment
 
 ### Option 1: GitHub Pages
@@ -105,10 +114,20 @@ homepage/
 │   ├── page.tsx       # Home page
 │   └── globals.css    # Global styles
 ├── components/
-│   └── Navigation.tsx # Shared navigation
+│   ├── Navigation.tsx    # Shared navigation
+│   ├── ThemeProvider.tsx # Theme context
+│   └── ThemeSwitcher.tsx # Theme dropdown
+├── config/
+│   └── themes.ts      # Theme definitions
 ├── public/            # Static assets
 └── package.json
 ```
+
+## Documentation
+
+- **GETTING_STARTED.md**: Step-by-step customization checklist
+- **DEPLOY.md**: Deployment instructions for various platforms
+- **THEMES.md**: Theme system documentation
 
 ## License
 

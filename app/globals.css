@@ -2,15 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-background: #ffffff;
+  --color-foreground: #000000;
+  --color-border: #000000;
+  --color-accent: #000000;
+  --color-muted: #6b7280;
+}
+
 @layer base {
   body {
-    @apply bg-white text-black;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
 @layer components {
   .nav-link {
-    @apply text-black hover:bg-black hover:text-white transition-colors duration-200 px-4 py-2 border border-black;
+    color: var(--color-foreground);
+    border: 1px solid var(--color-border);
+    transition: all 0.2s ease;
+    @apply px-4 py-2;
+  }
+  
+  .nav-link:hover {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
   }
   
   .content-container {

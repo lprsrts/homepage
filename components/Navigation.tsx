@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Navigation() {
   return (
-    <nav className="border-b border-black py-4">
+    <nav className="border-b py-4" style={{ borderColor: "var(--color-border)" }}>
       <div className="max-w-4xl mx-auto px-6 flex justify-between items-center">
         <Link href="/" className="text-xl font-bold hover:underline">
           AS

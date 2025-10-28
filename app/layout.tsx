@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 export const metadata: Metadata = {
   title: "Alper Saritas",
@@ -13,8 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased bg-white text-black">
-        {children}
+      <body className="antialiased">
+        <ThemeProvider>
+          {children}
+          <ThemeSwitcher />
+        </ThemeProvider>
       </body>
     </html>
   );
