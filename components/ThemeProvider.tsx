@@ -39,10 +39,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.style.setProperty("--color-accent-1", palette.colors.accent_1);
     root.style.setProperty("--color-accent-2", palette.colors.accent_2);
     root.style.setProperty("--color-main", palette.colors.main);
-    root.style.setProperty("--color-accent-3", palette.colors.accent_3);
-    root.style.setProperty("--color-accent-4", palette.colors.accent_4);
-    root.style.setProperty("--color-shade-3", palette.colors.shade_3);
-    root.style.setProperty("--color-shade-4", palette.colors.shade_4);
 
     localStorage.setItem("theme", theme);
   }, [theme, mounted]);

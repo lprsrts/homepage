@@ -3,20 +3,16 @@
 @tailwind utilities;
 
 :root {
-    /* Theme colors - Numbered shades and accents */
+    /* Theme colors - 5 color palette */
     --color-shade-1: #ffffff;
     --color-shade-2: #f5f5f5;
     --color-accent-1: #e5e5e5;
-    --color-accent-2: #d4d4d4;
+    --color-accent-2: #737373;
     --color-main: #000000;
-    --color-accent-3: #737373;
-    --color-accent-4: #525252;
-    --color-shade-3: #262626;
-    --color-shade-4: #0a0a0a;
 
     /* Semantic colors */
     --color-primary: var(--color-main);
-    --color-info: var(--color-accent-3);
+    --color-info: var(--color-accent-2);
     --color-success: #22c55e;
     --color-warning: #f59e0b;
     --color-danger: #ef4444;
@@ -35,7 +31,7 @@
 @layer components {
     .nav-link {
         color: var(--color-main);
-        border: 1px solid var(--color-accent-3);
+        border: 1px solid var(--color-accent-2);
         transition: all 0.2s ease;
         @apply px-4 py-2;
     }
@@ -112,6 +108,6 @@
     }
 
     .text-muted {
-        color: var(--color-shade-3);
+        color: var(--color-accent-2);
     }
 }

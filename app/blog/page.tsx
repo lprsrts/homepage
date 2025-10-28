@@ -25,7 +25,7 @@ export default function Blog() {
         <h1 className="text-4xl font-bold mb-8">Blog</h1>
         <div className="space-y-8">
           {posts.map((post) => (
-            <article key={post.id} className="border-b pb-8" style={{ borderColor: "var(--color-accent-3)" }}>
+            <article key={post.id} className="border-b pb-8" style={{ borderColor: "var(--color-accent-2)" }}>
               <Link href={`/blog/${post.id}`}>
                 <h2 className="text-2xl font-bold mb-2 hover:underline">{post.title}</h2>
               </Link>

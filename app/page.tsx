@@ -9,7 +9,7 @@ export default function Home() {
           <div
             className="w-32 h-32 mx-auto rounded-full border-2 overflow-hidden"
             style={{
-              borderColor: "var(--color-accent-3)",
+              borderColor: "var(--color-accent-2)",
               backgroundColor: "var(--color-accent-1)",
             }}
           >

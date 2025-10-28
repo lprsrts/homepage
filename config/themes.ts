@@ -52,7 +52,7 @@ export function getThemePalette(themeKey: string): Palette | undefined {
 // Semantic color constants
 export const semanticColors = {
   primary: "var(--color-main)",
-  info: "var(--color-accent-3)",
+  info: "var(--color-accent-2)",
   success: "#22c55e",
   warning: "#f59e0b",
   danger: "#ef4444",

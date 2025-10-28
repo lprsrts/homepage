@@ -29,7 +29,7 @@ export default function Updates() {
         
         <div className="space-y-6">
           {updates.map((update) => (
-            <div key={update.id} className="flex gap-6 pb-6 border-b" style={{ borderColor: "var(--color-accent-3)" }}>
+            <div key={update.id} className="flex gap-6 pb-6 border-b" style={{ borderColor: "var(--color-accent-2)" }}>
               <time className="text-sm min-w-[100px] text-muted">{update.date}</time>
               <p>{update.content}</p>
             </div>

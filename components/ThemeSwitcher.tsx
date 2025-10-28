@@ -36,7 +36,7 @@ export default function ThemeSwitcher() {
         style={{
           backgroundColor: "var(--color-shade-1)",
           color: "var(--color-main)",
-          borderColor: "var(--color-accent-3)",
+          borderColor: "var(--color-accent-2)",
         }}
         aria-label="Theme selector"
       >
@@ -48,7 +48,7 @@ export default function ThemeSwitcher() {
           className="absolute bottom-full right-0 mb-2 border min-w-[200px]"
           style={{
             backgroundColor: "var(--color-shade-1)",
-            borderColor: "var(--color-accent-3)",
+            borderColor: "var(--color-accent-2)",
           }}
         >
           {Object.entries(themes).map(([key, themeData]) => (
