@@ -3,16 +3,20 @@
 @tailwind utilities;
 
 :root {
-    /* Theme colors */
-    --color-light-shade: #ffffff;
-    --color-light-accent: #f5f5f5;
+    /* Theme colors - Numbered shades and accents */
+    --color-shade-1: #ffffff;
+    --color-shade-2: #f5f5f5;
+    --color-accent-1: #e5e5e5;
+    --color-accent-2: #d4d4d4;
     --color-main: #000000;
-    --color-dark-accent: #333333;
-    --color-dark-shade: #6b7280;
+    --color-accent-3: #737373;
+    --color-accent-4: #525252;
+    --color-shade-3: #262626;
+    --color-shade-4: #0a0a0a;
 
     /* Semantic colors */
     --color-primary: var(--color-main);
-    --color-info: var(--color-dark-accent);
+    --color-info: var(--color-accent-3);
     --color-success: #22c55e;
     --color-warning: #f59e0b;
     --color-danger: #ef4444;
@@ -20,7 +24,7 @@
 
 @layer base {
     body {
-        background-color: var(--color-light-shade);
+        background-color: var(--color-shade-1);
         color: var(--color-main);
         transition:
             background-color 0.3s ease,
@@ -31,14 +35,14 @@
 @layer components {
     .nav-link {
         color: var(--color-main);
-        border: 1px solid var(--color-dark-accent);
+        border: 1px solid var(--color-accent-3);
         transition: all 0.2s ease;
         @apply px-4 py-2;
     }
 
     .nav-link:hover {
         background-color: var(--color-main);
-        color: var(--color-light-shade);
+        color: var(--color-shade-1);
     }
 
     .content-container {
@@ -48,7 +52,7 @@
     /* Semantic button styles */
     .btn-primary {
         background-color: var(--color-primary);
-        color: var(--color-light-shade);
+        color: var(--color-shade-1);
         border: 1px solid var(--color-primary);
         transition: all 0.2s ease;
         @apply px-4 py-2;
@@ -81,7 +85,7 @@
 
     .btn-info {
         background-color: var(--color-info);
-        color: var(--color-light-shade);
+        color: var(--color-shade-1);
         border: 1px solid var(--color-info);
         @apply px-4 py-2;
     }
@@ -108,6 +112,6 @@
     }
 
     .text-muted {
-        color: var(--color-dark-shade);
+        color: var(--color-shade-3);
     }
 }

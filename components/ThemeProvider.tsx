@@ -1,12 +1,14 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { themes, defaultTheme, type Theme } from "@/config/themes";
+import { themes, defaultTheme, getThemePalette, type Theme } from "@/config/themes";
+import type { Palette } from "@/config/palette";
 
 interface ThemeContextType {
   theme: string;
   setTheme: (theme: string) => void;
   currentTheme: Theme;
+  currentPalette: Palette | undefined;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -26,16 +28,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!mounted) return;
 
-    const currentTheme = themes[theme];
-    if (!currentTheme) return;
+    const palette = getThemePalette(theme);
+    if (!palette) return;
 
     const root = document.documentElement;
 
-    root.style.setProperty("--color-light-shade", currentTheme.colors.light_shade);
-    root.style.setProperty("--color-light-accent", currentTheme.colors.light_accent);
-    root.style.setProperty("--color-main", currentTheme.colors.main);
-    root.style.setProperty("--color-dark-accent", currentTheme.colors.dark_accent);
-    root.style.setProperty("--color-dark-shade", currentTheme.colors.dark_shade);
+    // Set numbered shade and accent variables
+    root.style.setProperty("--color-shade-1", palette.colors.shade_1);
+    root.style.setProperty("--color-shade-2", palette.colors.shade_2);
+    root.style.setProperty("--color-accent-1", palette.colors.accent_1);
+    root.style.setProperty("--color-accent-2", palette.colors.accent_2);
+    root.style.setProperty("--color-main", palette.colors.main);
+    root.style.setProperty("--color-accent-3", palette.colors.accent_3);
+    root.style.setProperty("--color-accent-4", palette.colors.accent_4);
+    root.style.setProperty("--color-shade-3", palette.colors.shade_3);
+    root.style.setProperty("--color-shade-4", palette.colors.shade_4);
 
     localStorage.setItem("theme", theme);
   }, [theme, mounted]);
@@ -48,9 +55,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   const currentTheme = themes[theme] || themes[defaultTheme];
+  const currentPalette = getThemePalette(theme);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, currentTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme, currentTheme, currentPalette }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -35,8 +35,8 @@ export default function Shop() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product) => (
-            <div key={product.id} className="border" style={{ borderColor: "var(--color-dark-accent)" }}>
-              <div className="aspect-square" style={{ backgroundColor: "var(--color-light-accent)" }}></div>
+            <div key={product.id} className="border" style={{ borderColor: "var(--color-accent-3)" }}>
+              <div className="aspect-square" style={{ backgroundColor: "var(--color-accent-1)" }}></div>
               <div className="p-4">
                 <h2 className="text-xl font-bold mb-2">{product.name}</h2>
                 <p className="text-sm mb-4">{product.description}</p>

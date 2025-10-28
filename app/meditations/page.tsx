@@ -29,7 +29,7 @@ export default function Meditations() {
         
         <div className="space-y-12">
           {meditations.map((meditation) => (
-            <div key={meditation.id} className="border-l-2 pl-6" style={{ borderColor: "var(--color-dark-accent)" }}>
+            <div key={meditation.id} className="border-l-2 pl-6" style={{ borderColor: "var(--color-accent-3)" }}>
               <p className="text-xl italic mb-4">&ldquo;{meditation.content}&rdquo;</p>
               <p className="text-sm text-muted">{meditation.date}</p>
             </div>

@@ -9,8 +9,8 @@ export default function Home() {
           <div
             className="w-32 h-32 mx-auto rounded-full border-2 overflow-hidden"
             style={{
-              borderColor: "var(--color-dark-accent)",
-              backgroundColor: "var(--color-light-accent)",
+              borderColor: "var(--color-accent-3)",
+              backgroundColor: "var(--color-accent-1)",
             }}
           >
             {/* Replace with your actual image at public/profile.jpg */}
