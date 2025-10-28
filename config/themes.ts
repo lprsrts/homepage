@@ -7,36 +7,12 @@ export interface Theme {
 
 export const themes: Record<string, Theme> = {
   default_light: {
-    name: "Default Light",
-    palette: "monochrome_light",
+    name: "Toupe Light",
+    palette: "toupe_light",
   },
   default_dark: {
-    name: "Default Dark",
-    palette: "monochrome_dark",
-  },
-  sepia: {
-    name: "Sepia",
-    palette: "sepia",
-  },
-  forest: {
-    name: "Forest",
-    palette: "forest",
-  },
-  ocean: {
-    name: "Ocean",
-    palette: "ocean",
-  },
-  sunset: {
-    name: "Sunset",
-    palette: "sunset",
-  },
-  midnight: {
-    name: "Midnight",
-    palette: "midnight",
-  },
-  minimal: {
-    name: "Minimal Gray",
-    palette: "minimal_gray",
+    name: "Toupe Dark",
+    palette: "toupe_dark",
   },
 };
 
@@ -51,9 +27,9 @@ export function getThemePalette(themeKey: string): Palette | undefined {
 
 // Semantic color constants
 export const semanticColors = {
-  primary: "var(--color-main)",
-  info: "var(--color-accent-2)",
-  success: "#22c55e",
-  warning: "#f59e0b",
-  danger: "#ef4444",
+  primary: "#4c4239",
+  info: "#171418",
+  success: "#4c8e49",
+  warning: "#c97e11",
+  danger: "#f44336",
 } as const;

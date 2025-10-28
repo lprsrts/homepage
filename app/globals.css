@@ -4,24 +4,24 @@
 
 :root {
     /* Theme colors - 5 color palette */
-    --color-shade-1: #ffffff;
-    --color-shade-2: #f5f5f5;
-    --color-accent-1: #e5e5e5;
-    --color-accent-2: #737373;
-    --color-main: #000000;
+    --color-shade-1: #e7e5e4;
+    --color-shade-2: #171418;
+    --color-accent-1: #7d8488;
+    --color-accent-2: #727686;
+    --color-main: #362a26;
 
     /* Semantic colors */
-    --color-primary: var(--color-main);
-    --color-info: var(--color-accent-2);
-    --color-success: #22c55e;
-    --color-warning: #f59e0b;
-    --color-danger: #ef4444;
+    --color-primary: #4c4239;
+    --color-info: #171418;
+    --color-success: #4c8e49;
+    --color-warning: #c97e11;
+    --color-danger: #f44336;
 }
 
 @layer base {
     body {
         background-color: var(--color-shade-1);
-        color: var(--color-main);
+        color: var(--color-shade-2);
         transition:
             background-color 0.3s ease,
             color 0.3s ease;
@@ -30,14 +30,14 @@
 
 @layer components {
     .nav-link {
-        color: var(--color-main);
+        color: var(--color-shade-2);
         border: 1px solid var(--color-accent-2);
         transition: all 0.2s ease;
         @apply px-4 py-2;
     }
 
     .nav-link:hover {
-        background-color: var(--color-main);
+        background-color: var(--color-accent-1);
         color: var(--color-shade-1);
     }
 

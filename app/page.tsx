@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ThemeAwareProfilePicture from "@/components/ThemeAwareProfilePicture";
 
 export default function Home() {
   return (
@@ -6,22 +7,16 @@ export default function Home() {
       <div className="text-center max-w-2xl">
         {/* Profile Picture */}
         <div className="mb-8">
-          <div
-            className="w-32 h-32 mx-auto rounded-full border-2 overflow-hidden"
-            style={{
-              borderColor: "var(--color-accent-2)",
-              backgroundColor: "var(--color-accent-1)",
-            }}
-          >
-            {/* Replace with your actual image at public/profile.jpg */}
-          </div>
+          <ThemeAwareProfilePicture
+            lightImage="/pp_c16_g1p3_inv.png"
+            darkImage="/pp_c16_g1p3.png"
+            alt="Profile Picture"
+          />
         </div>
 
         {/* Name */}
         <h1 className="text-4xl font-bold mb-2">lprsrts</h1>
-        <p className="text-lg mb-12 text-muted">
-          Stuff made, shared here.
-        </p>
+        <p className="text-lg mb-12 text-muted">Stuff made, shared here.</p>
 
         {/* Navigation Links */}
         <nav className="space-y-3 mb-12">
