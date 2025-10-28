@@ -34,9 +34,9 @@ export default function ThemeSwitcher() {
         onClick={() => setIsOpen(!isOpen)}
         className="px-4 py-2 text-sm border transition-colors"
         style={{
-          backgroundColor: "var(--color-background)",
-          color: "var(--color-foreground)",
-          borderColor: "var(--color-border)",
+          backgroundColor: "var(--color-light-shade)",
+          color: "var(--color-main)",
+          borderColor: "var(--color-dark-accent)",
         }}
         aria-label="Theme selector"
       >
@@ -47,8 +47,8 @@ export default function ThemeSwitcher() {
         <div
           className="absolute bottom-full right-0 mb-2 border min-w-[200px]"
           style={{
-            backgroundColor: "var(--color-background)",
-            borderColor: "var(--color-border)",
+            backgroundColor: "var(--color-light-shade)",
+            borderColor: "var(--color-dark-accent)",
           }}
         >
           {Object.entries(themes).map(([key, themeData]) => (
@@ -57,8 +57,8 @@ export default function ThemeSwitcher() {
               onClick={() => handleThemeChange(key)}
               className="w-full px-4 py-2 text-sm text-left transition-colors flex items-center justify-between"
               style={{
-                backgroundColor: theme === key ? "var(--color-foreground)" : "var(--color-background)",
-                color: theme === key ? "var(--color-background)" : "var(--color-foreground)",
+                backgroundColor: theme === key ? "var(--color-main)" : "var(--color-light-shade)",
+                color: theme === key ? "var(--color-light-shade)" : "var(--color-main)",
               }}
             >
               <span>{themeData.name}</span>

@@ -25,13 +25,13 @@ export default function Meditations() {
       <Navigation />
       <main className="content-container">
         <h1 className="text-4xl font-bold mb-8">Meditations</h1>
-        <p className="mb-12" style={{ color: "var(--color-muted)" }}>Short thoughts and reflections.</p>
+        <p className="mb-12 text-muted">Short thoughts and reflections.</p>
         
         <div className="space-y-12">
           {meditations.map((meditation) => (
-            <div key={meditation.id} className="border-l-2 pl-6" style={{ borderColor: "var(--color-border)" }}>
+            <div key={meditation.id} className="border-l-2 pl-6" style={{ borderColor: "var(--color-dark-accent)" }}>
               <p className="text-xl italic mb-4">&ldquo;{meditation.content}&rdquo;</p>
-              <p className="text-sm" style={{ color: "var(--color-muted)" }}>{meditation.date}</p>
+              <p className="text-sm text-muted">{meditation.date}</p>
             </div>
           ))}
         </div>

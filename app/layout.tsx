@@ -4,8 +4,8 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 export const metadata: Metadata = {
-  title: "Alper Saritas",
-  description: "Personal website - Blog, Projects, and More",
+  title: "lprsrts",
+  description: "Stuff made, shared here.",
 };
 
 export default function RootLayout({

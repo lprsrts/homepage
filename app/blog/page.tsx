@@ -25,11 +25,11 @@ export default function Blog() {
         <h1 className="text-4xl font-bold mb-8">Blog</h1>
         <div className="space-y-8">
           {posts.map((post) => (
-            <article key={post.id} className="border-b pb-8" style={{ borderColor: "var(--color-border)" }}>
+            <article key={post.id} className="border-b pb-8" style={{ borderColor: "var(--color-dark-accent)" }}>
               <Link href={`/blog/${post.id}`}>
                 <h2 className="text-2xl font-bold mb-2 hover:underline">{post.title}</h2>
               </Link>
-              <p className="text-sm mb-4" style={{ color: "var(--color-muted)" }}>{post.date}</p>
+              <p className="text-sm mb-4 text-muted">{post.date}</p>
               <p>{post.excerpt}</p>
             </article>
           ))}

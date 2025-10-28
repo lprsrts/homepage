@@ -52,9 +52,9 @@ export default function Media() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border transition-colors p-4 hover:invert"
-                style={{ borderColor: "var(--color-border)" }}
+                style={{ borderColor: "var(--color-dark-accent)" }}
               >
-                <div className="aspect-video mb-4" style={{ backgroundColor: "var(--color-muted)" }}></div>
+                <div className="aspect-video mb-4" style={{ backgroundColor: "var(--color-light-accent)" }}></div>
                 <h3 className="font-bold">{video.title}</h3>
               </a>
             ))}
@@ -66,8 +66,8 @@ export default function Media() {
           <h2 className="text-2xl font-bold mb-6">Photos</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {photos.map((photo) => (
-              <div key={photo.id} className="border" style={{ borderColor: "var(--color-border)" }}>
-                <div className="aspect-square" style={{ backgroundColor: "var(--color-muted)" }}></div>
+              <div key={photo.id} className="border" style={{ borderColor: "var(--color-dark-accent)" }}>
+                <div className="aspect-square" style={{ backgroundColor: "var(--color-light-accent)" }}></div>
                 <p className="text-sm p-2">{photo.title}</p>
               </div>
             ))}

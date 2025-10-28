@@ -6,17 +6,22 @@ export default function Home() {
       <div className="text-center max-w-2xl">
         {/* Profile Picture */}
         <div className="mb-8">
-          <div 
-            className="w-32 h-32 mx-auto rounded-full border-2 overflow-hidden" 
-            style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-muted)" }}
+          <div
+            className="w-32 h-32 mx-auto rounded-full border-2 overflow-hidden"
+            style={{
+              borderColor: "var(--color-dark-accent)",
+              backgroundColor: "var(--color-light-accent)",
+            }}
           >
             {/* Replace with your actual image at public/profile.jpg */}
           </div>
         </div>
 
         {/* Name */}
-        <h1 className="text-4xl font-bold mb-2">Alper Saritas</h1>
-        <p className="text-lg mb-12" style={{ color: "var(--color-muted)" }}>Developer & Creator</p>
+        <h1 className="text-4xl font-bold mb-2">lprsrts</h1>
+        <p className="text-lg mb-12 text-muted">
+          Stuff made, shared here.
+        </p>
 
         {/* Navigation Links */}
         <nav className="space-y-3 mb-12">
@@ -42,28 +47,25 @@ export default function Home() {
 
         {/* Social Links */}
         <div className="flex justify-center gap-4 text-sm">
-          <a 
-            href="https://github.com/lprsrts" 
-            target="_blank" 
+          <a
+            href="https://github.com/lprsrts"
+            target="_blank"
             rel="noopener noreferrer"
             className="hover:underline"
           >
             GitHub
           </a>
           <span>•</span>
-          <a 
-            href="https://instagram.com/lprsrts" 
-            target="_blank" 
+          <a
+            href="https://instagram.com/lprsrts"
+            target="_blank"
             rel="noopener noreferrer"
             className="hover:underline"
           >
             Instagram
           </a>
           <span>•</span>
-          <a 
-            href="mailto:hello@alpersaritas.com"
-            className="hover:underline"
-          >
+          <a href="mailto:hello@alpersaritas.com" className="hover:underline">
             Email
           </a>
         </div>

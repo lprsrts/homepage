@@ -1,95 +1,104 @@
 export interface Theme {
   name: string;
   colors: {
-    background: string;
-    foreground: string;
-    border: string;
-    accent: string;
-    muted: string;
+    light_shade: string;
+    light_accent: string;
+    main: string;
+    dark_accent: string;
+    dark_shade: string;
   };
 }
 
 export const themes: Record<string, Theme> = {
-  default: {
-    name: "Default (Black & White)",
+  default_light: {
+    name: "Default Light",
     colors: {
-      background: "#ffffff",
-      foreground: "#000000",
-      border: "#000000",
-      accent: "#000000",
-      muted: "#6b7280",
+      light_shade: "#ffffff",
+      light_accent: "#f5f5f5",
+      main: "#000000",
+      dark_accent: "#333333",
+      dark_shade: "#6b7280",
     },
   },
-  dark: {
-    name: "Dark",
+  default_dark: {
+    name: "Default Dark",
     colors: {
-      background: "#000000",
-      foreground: "#ffffff",
-      border: "#ffffff",
-      accent: "#ffffff",
-      muted: "#9ca3af",
+      light_shade: "#000000",
+      light_accent: "#1a1a1a",
+      main: "#ffffff",
+      dark_accent: "#cccccc",
+      dark_shade: "#9ca3af",
     },
   },
   sepia: {
     name: "Sepia",
     colors: {
-      background: "#f4f1ea",
-      foreground: "#5c4a3a",
-      border: "#5c4a3a",
-      accent: "#8b6f47",
-      muted: "#9b8b7e",
+      light_shade: "#f4f1ea",
+      light_accent: "#e8e3d6",
+      main: "#5c4a3a",
+      dark_accent: "#8b6f47",
+      dark_shade: "#9b8b7e",
     },
   },
   forest: {
     name: "Forest",
     colors: {
-      background: "#f0f4f0",
-      foreground: "#1a3a1a",
-      border: "#2d5a2d",
-      accent: "#3d7a3d",
-      muted: "#6b8e6b",
+      light_shade: "#f0f4f0",
+      light_accent: "#e1ebe1",
+      main: "#1a3a1a",
+      dark_accent: "#2d5a2d",
+      dark_shade: "#6b8e6b",
     },
   },
   ocean: {
     name: "Ocean",
     colors: {
-      background: "#f0f4f8",
-      foreground: "#0f2a3a",
-      border: "#1e3a5f",
-      accent: "#2c5f8d",
-      muted: "#5a8bb0",
+      light_shade: "#f0f4f8",
+      light_accent: "#e1ebf4",
+      main: "#0f2a3a",
+      dark_accent: "#1e3a5f",
+      dark_shade: "#5a8bb0",
     },
   },
   sunset: {
     name: "Sunset",
     colors: {
-      background: "#fff5f0",
-      foreground: "#3a1f1f",
-      border: "#8b4513",
-      accent: "#d2691e",
-      muted: "#cd853f",
+      light_shade: "#fff5f0",
+      light_accent: "#ffe8db",
+      main: "#3a1f1f",
+      dark_accent: "#8b4513",
+      dark_shade: "#cd853f",
     },
   },
   midnight: {
     name: "Midnight",
     colors: {
-      background: "#0f0f23",
-      foreground: "#e0e0ff",
-      border: "#6666cc",
-      accent: "#8888ff",
-      muted: "#9999cc",
+      light_shade: "#0f0f23",
+      light_accent: "#1a1a3d",
+      main: "#e0e0ff",
+      dark_accent: "#6666cc",
+      dark_shade: "#9999cc",
     },
   },
   minimal: {
     name: "Minimal Gray",
     colors: {
-      background: "#fafafa",
-      foreground: "#1a1a1a",
-      border: "#333333",
-      accent: "#404040",
-      muted: "#737373",
+      light_shade: "#fafafa",
+      light_accent: "#f0f0f0",
+      main: "#1a1a1a",
+      dark_accent: "#404040",
+      dark_shade: "#737373",
     },
   },
 };
 
-export const defaultTheme = "default";
+export const defaultTheme = "default_light";
+
+// Semantic color constants
+export const semanticColors = {
+  primary: "var(--color-main)",
+  info: "var(--color-dark-accent)",
+  success: "#22c55e",
+  warning: "#f59e0b",
+  danger: "#ef4444",
+} as const;

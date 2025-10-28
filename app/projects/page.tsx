@@ -26,12 +26,12 @@ export default function Projects() {
         <h1 className="text-4xl font-bold mb-8">Projects</h1>
         <div className="space-y-8">
           {projects.map((project) => (
-            <div key={project.id} className="border p-6" style={{ borderColor: "var(--color-border)" }}>
+            <div key={project.id} className="border p-6" style={{ borderColor: "var(--color-dark-accent)" }}>
               <h2 className="text-2xl font-bold mb-3">{project.title}</h2>
               <p className="mb-4">{project.description}</p>
               <div className="flex gap-2 mb-4">
                 {project.tech.map((tech) => (
-                  <span key={tech} className="text-xs border px-2 py-1" style={{ borderColor: "var(--color-border)" }}>
+                  <span key={tech} className="text-xs border px-2 py-1" style={{ borderColor: "var(--color-dark-accent)" }}>
                     {tech}
                   </span>
                 ))}

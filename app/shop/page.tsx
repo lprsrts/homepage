@@ -31,18 +31,18 @@ export default function Shop() {
       <Navigation />
       <main className="content-container">
         <h1 className="text-4xl font-bold mb-8">Shop</h1>
-        <p className="mb-12" style={{ color: "var(--color-muted)" }}>Kits, merch, and more.</p>
+        <p className="mb-12 text-muted">Kits, merch, and more.</p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product) => (
-            <div key={product.id} className="border" style={{ borderColor: "var(--color-border)" }}>
-              <div className="aspect-square" style={{ backgroundColor: "var(--color-muted)" }}></div>
+            <div key={product.id} className="border" style={{ borderColor: "var(--color-dark-accent)" }}>
+              <div className="aspect-square" style={{ backgroundColor: "var(--color-light-accent)" }}></div>
               <div className="p-4">
                 <h2 className="text-xl font-bold mb-2">{product.name}</h2>
                 <p className="text-sm mb-4">{product.description}</p>
                 <div className="flex justify-between items-center">
                   <span className="font-bold">{product.price}</span>
-                  <button className="border px-4 py-2 text-sm transition-colors hover:invert" style={{ borderColor: "var(--color-border)" }}>
+                  <button className="btn-primary">
                     Add to Cart
                   </button>
                 </div>

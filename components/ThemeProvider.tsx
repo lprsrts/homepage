@@ -18,29 +18,36 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMounted(true);
     const savedTheme = localStorage.getItem("theme") || defaultTheme;
-    setThemeState(savedTheme);
+    // Validate that the saved theme exists, otherwise use default
+    const validTheme = themes[savedTheme] ? savedTheme : defaultTheme;
+    setThemeState(validTheme);
   }, []);
 
   useEffect(() => {
     if (!mounted) return;
 
     const currentTheme = themes[theme];
+    if (!currentTheme) return;
+
     const root = document.documentElement;
 
-    root.style.setProperty("--color-background", currentTheme.colors.background);
-    root.style.setProperty("--color-foreground", currentTheme.colors.foreground);
-    root.style.setProperty("--color-border", currentTheme.colors.border);
-    root.style.setProperty("--color-accent", currentTheme.colors.accent);
-    root.style.setProperty("--color-muted", currentTheme.colors.muted);
+    root.style.setProperty("--color-light-shade", currentTheme.colors.light_shade);
+    root.style.setProperty("--color-light-accent", currentTheme.colors.light_accent);
+    root.style.setProperty("--color-main", currentTheme.colors.main);
+    root.style.setProperty("--color-dark-accent", currentTheme.colors.dark_accent);
+    root.style.setProperty("--color-dark-shade", currentTheme.colors.dark_shade);
 
     localStorage.setItem("theme", theme);
   }, [theme, mounted]);
 
   const setTheme = (newTheme: string) => {
-    setThemeState(newTheme);
+    // Validate theme exists before setting
+    if (themes[newTheme]) {
+      setThemeState(newTheme);
+    }
   };
 
-  const currentTheme = themes[theme];
+  const currentTheme = themes[theme] || themes[defaultTheme];
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, currentTheme }}>
