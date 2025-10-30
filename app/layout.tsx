@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { CartProvider } from "@/components/CartProvider";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 export const metadata: Metadata = {
@@ -17,8 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <ThemeProvider>
-          {children}
-          <ThemeSwitcher />
+          <CartProvider>
+            {children}
+            <ThemeSwitcher />
+          </CartProvider>
         </ThemeProvider>
       </body>
     </html>

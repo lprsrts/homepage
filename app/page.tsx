@@ -61,7 +61,7 @@ export default function Home() {
             Instagram
           </a>
           <span>•</span>
-          <a href="mailto:hello@alpersaritas.com" className="hover:underline">
+          <a href="mailto:alper@saritas.tr" className="hover:underline">
             Email
           </a>
         </div>

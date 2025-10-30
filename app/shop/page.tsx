@@ -1,4 +1,7 @@
+"use client";
+
 import Navigation from "@/components/Navigation";
+import { useCart, type Product } from "@/components/CartProvider";
 
 // Sample products - replace with actual data
 const products = [
@@ -26,6 +29,8 @@ const products = [
 ];
 
 export default function Shop() {
+  const { addToCart } = useCart();
+
   return (
     <>
       <Navigation />
@@ -42,7 +47,10 @@ export default function Shop() {
                 <p className="text-sm mb-4">{product.description}</p>
                 <div className="flex justify-between items-center">
                   <span className="font-bold">{product.price}</span>
-                  <button className="btn-primary">
+                  <button 
+                    className="btn-primary"
+                    onClick={() => addToCart(product)}
+                  >
                     Add to Cart
                   </button>
                 </div>

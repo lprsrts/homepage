@@ -35,7 +35,7 @@ export default function ThemeSwitcher() {
         className="px-4 py-2 text-sm border transition-colors"
         style={{
           backgroundColor: "var(--color-shade-1)",
-          color: "var(--color-main)",
+          color: "var(--color-shade-2)",
           borderColor: "var(--color-accent-2)",
         }}
         aria-label="Theme selector"
@@ -57,8 +57,8 @@ export default function ThemeSwitcher() {
               onClick={() => handleThemeChange(key)}
               className="w-full px-4 py-2 text-sm text-left transition-colors flex items-center justify-between"
               style={{
-                backgroundColor: theme === key ? "var(--color-main)" : "var(--color-shade-1)",
-                color: theme === key ? "var(--color-shade-1)" : "var(--color-main)",
+                backgroundColor: "var(--color-shade-1)",
+                color: "var(--color-shade-2)",
               }}
             >
               <span>{themeData.name}</span>
