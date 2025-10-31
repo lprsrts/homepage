@@ -113,4 +113,100 @@
     .text-muted {
         color: var(--color-accent-2);
     }
+
+    /* Markdown content styles */
+    .markdown-content h1 {
+        @apply text-4xl font-bold mt-12 mb-6;
+    }
+
+    .markdown-content h2 {
+        @apply text-3xl font-bold mt-10 mb-4;
+    }
+
+    .markdown-content h3 {
+        @apply text-2xl font-bold mt-8 mb-4;
+    }
+
+    .markdown-content h4 {
+        @apply text-xl font-bold mt-6 mb-3;
+    }
+
+    .markdown-content p {
+        @apply mb-4 leading-relaxed;
+    }
+
+    .markdown-content ul,
+    .markdown-content ol {
+        @apply mb-4 ml-6;
+    }
+
+    .markdown-content li {
+        @apply mb-2;
+    }
+
+    .markdown-content ul {
+        @apply list-disc;
+    }
+
+    .markdown-content ol {
+        @apply list-decimal;
+    }
+
+    .markdown-content blockquote {
+        @apply border-l-4 pl-4 italic my-4;
+        border-color: var(--color-accent-2);
+    }
+
+    .markdown-content code {
+        @apply px-1 py-0.5 rounded text-sm;
+        background-color: var(--color-shade-1);
+        font-family: 'Courier New', monospace;
+    }
+
+    .markdown-content pre {
+        @apply p-4 rounded my-4 overflow-x-auto;
+        background-color: var(--color-shade-1);
+    }
+
+    .markdown-content pre code {
+        @apply p-0;
+        background-color: transparent;
+    }
+
+    .markdown-content a {
+        @apply underline;
+        color: var(--color-accent-1);
+    }
+
+    .markdown-content a:hover {
+        color: var(--color-shade-2);
+    }
+
+    .markdown-content table {
+        @apply w-full my-4 border-collapse;
+    }
+
+    .markdown-content th,
+    .markdown-content td {
+        @apply border p-2;
+        border-color: var(--color-accent-2);
+    }
+
+    .markdown-content th {
+        @apply font-bold;
+    }
+
+    .markdown-content hr {
+        @apply my-8;
+        border-color: var(--color-accent-2);
+    }
+
+    /* Math equations */
+    .markdown-content .katex {
+        font-size: 1.1em;
+    }
+
+    .markdown-content .katex-display {
+        @apply my-6;
+    }
 }
