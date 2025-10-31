@@ -58,16 +58,7 @@ export default function AdminDashboard() {
             style={{ borderColor: "var(--color-accent-2)" }}
           >
             <h2 className="text-2xl font-bold mb-2">Blog Posts</h2>
-            <p className="text-muted">Manage blog posts</p>
-          </Link>
-
-          <Link
-            href="/admin/articles"
-            className="p-6 border rounded-lg hover:shadow-lg transition-shadow"
-            style={{ borderColor: "var(--color-accent-2)" }}
-          >
-            <h2 className="text-2xl font-bold mb-2">Articles</h2>
-            <p className="text-muted">Manage articles (card pile)</p>
+            <p className="text-muted">Manage scientific & technical writings</p>
           </Link>
 
           <Link
@@ -76,7 +67,7 @@ export default function AdminDashboard() {
             style={{ borderColor: "var(--color-accent-2)" }}
           >
             <h2 className="text-2xl font-bold mb-2">Meditations</h2>
-            <p className="text-muted">Manage meditations</p>
+            <p className="text-muted">Manage philosophical reflections</p>
           </Link>
 
           <Link

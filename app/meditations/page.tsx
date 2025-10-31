@@ -1,40 +1,59 @@
 import Navigation from "@/components/Navigation";
-
-// Sample meditations - replace with actual data
-const meditations = [
-  {
-    id: "1",
-    content: "The only way to do great work is to love what you do.",
-    date: "2024-01-20",
-  },
-  {
-    id: "2",
-    content: "Simplicity is the ultimate sophistication.",
-    date: "2024-01-18",
-  },
-  {
-    id: "3",
-    content: "Focus on being productive instead of busy.",
-    date: "2024-01-15",
-  },
-];
+import Link from "next/link";
+import { getMeditations } from "@/lib/content";
 
 export default function Meditations() {
+  const meditations = getMeditations();
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   return (
     <>
       <Navigation />
       <main className="content-container">
-        <h1 className="text-4xl font-bold mb-8">Meditations</h1>
-        <p className="mb-12 text-muted">Short thoughts and reflections.</p>
+        <div className="mb-12 text-center">
+          <h1 className="text-4xl font-bold mb-3 italic">Meditations</h1>
+          <p className="text-lg text-muted">Philosophical reflections and contemplations</p>
+        </div>
         
-        <div className="space-y-12">
+        <div className="space-y-8 max-w-2xl mx-auto">
           {meditations.map((meditation) => (
-            <div key={meditation.id} className="border-l-2 pl-6" style={{ borderColor: "var(--color-accent-2)" }}>
-              <p className="text-xl italic mb-4">&ldquo;{meditation.content}&rdquo;</p>
-              <p className="text-sm text-muted">{meditation.date}</p>
-            </div>
+            <Link key={meditation.slug} href={`/meditations/${meditation.slug}`}>
+              <article 
+                className="p-6 border-2 rounded hover:shadow-lg transition-all cursor-pointer"
+                style={{ 
+                  borderColor: "var(--color-accent-2)",
+                  backgroundColor: "transparent",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--color-shade-1)";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold mb-3 italic">{meditation.title}</h2>
+                  <p className="text-sm mb-4 text-muted">{formatDate(meditation.date)}</p>
+                  <p className="text-muted italic leading-relaxed">&ldquo;{meditation.excerpt}&rdquo;</p>
+                </div>
+              </article>
+            </Link>
           ))}
         </div>
+
+        {meditations.length === 0 && (
+          <p className="text-center text-muted py-12">No meditations yet.</p>
+        )}
       </main>
     </>
   );
