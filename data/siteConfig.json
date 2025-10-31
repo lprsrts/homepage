@@ -17,7 +17,7 @@
       "title": "Updates"
     },
     "media": {
-      "enabled": true,
+      "enabled": false,
       "title": "Media"
     },
     "shop": {
