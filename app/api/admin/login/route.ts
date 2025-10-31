@@ -3,6 +3,8 @@ import bcrypt from 'bcryptjs';
 import { getAdminCredentials } from '@/lib/data';
 import { signToken } from '@/lib/auth';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     const { username, password } = await request.json();

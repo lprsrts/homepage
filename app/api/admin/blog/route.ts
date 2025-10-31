@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { verifyAuth } from "@/lib/auth";
 import { getBlogPosts, saveBlogPost, deleteBlogPost } from "@/lib/content";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: Request) {
   const authResult = await verifyAuth(request);
   if (!authResult.authenticated) {
