@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyAuth } from "@/lib/auth";
-import { getBlogPosts, saveBlogPost, deleteBlogPost } from "@/lib/content";
+import { getMeditations, saveMeditation, deleteMeditation } from "@/lib/content";
 
 export async function GET(request: Request) {
   const authResult = await verifyAuth(request);
@@ -9,12 +9,12 @@ export async function GET(request: Request) {
   }
 
   try {
-    const posts = getBlogPosts();
-    return NextResponse.json({ posts });
+    const meditations = getMeditations();
+    return NextResponse.json({ meditations });
   } catch (error) {
-    console.error("Error loading blog posts:", error);
+    console.error("Error loading meditations:", error);
     return NextResponse.json(
-      { error: "Failed to load blog posts" },
+      { error: "Failed to load meditations" },
       { status: 500 }
     );
   }
@@ -27,28 +27,28 @@ export async function POST(request: Request) {
   }
 
   try {
-    const post = await request.json();
+    const meditation = await request.json();
 
-    if (!post.slug || !post.title) {
+    if (!meditation.slug || !meditation.title) {
       return NextResponse.json(
         { error: "Slug and title are required" },
         { status: 400 }
       );
     }
 
-    saveBlogPost({
-      slug: post.slug,
-      title: post.title,
-      date: post.date || new Date().toISOString().split("T")[0],
-      excerpt: post.excerpt || "",
-      content: post.content || "",
+    saveMeditation({
+      slug: meditation.slug,
+      title: meditation.title,
+      date: meditation.date || new Date().toISOString().split("T")[0],
+      excerpt: meditation.excerpt || "",
+      content: meditation.content || "",
     });
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error creating blog post:", error);
+    console.error("Error creating meditation:", error);
     return NextResponse.json(
-      { error: "Failed to create blog post" },
+      { error: "Failed to create meditation" },
       { status: 500 }
     );
   }
@@ -61,28 +61,28 @@ export async function PUT(request: Request) {
   }
 
   try {
-    const post = await request.json();
+    const meditation = await request.json();
 
-    if (!post.slug || !post.title) {
+    if (!meditation.slug || !meditation.title) {
       return NextResponse.json(
         { error: "Slug and title are required" },
         { status: 400 }
       );
     }
 
-    saveBlogPost({
-      slug: post.slug,
-      title: post.title,
-      date: post.date || new Date().toISOString().split("T")[0],
-      excerpt: post.excerpt || "",
-      content: post.content || "",
+    saveMeditation({
+      slug: meditation.slug,
+      title: meditation.title,
+      date: meditation.date || new Date().toISOString().split("T")[0],
+      excerpt: meditation.excerpt || "",
+      content: meditation.content || "",
     });
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error updating blog post:", error);
+    console.error("Error updating meditation:", error);
     return NextResponse.json(
-      { error: "Failed to update blog post" },
+      { error: "Failed to update meditation" },
       { status: 500 }
     );
   }
@@ -102,12 +102,12 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: "Slug is required" }, { status: 400 });
     }
 
-    deleteBlogPost(slug);
+    deleteMeditation(slug);
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error deleting blog post:", error);
+    console.error("Error deleting meditation:", error);
     return NextResponse.json(
-      { error: "Failed to delete blog post" },
+      { error: "Failed to delete meditation" },
       { status: 500 }
     );
   }
