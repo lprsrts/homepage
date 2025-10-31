@@ -20,3 +20,26 @@ export function verifyToken(token: string): TokenPayload | null {
     return null;
   }
 }
+
+export async function verifyAuth(request: Request): Promise<{
+  authenticated: boolean;
+  user?: TokenPayload;
+}> {
+  try {
+    const authHeader = request.headers.get("authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return { authenticated: false };
+    }
+
+    const token = authHeader.substring(7);
+    const payload = verifyToken(token);
+
+    if (!payload) {
+      return { authenticated: false };
+    }
+
+    return { authenticated: true, user: payload };
+  } catch (error) {
+    return { authenticated: false };
+  }
+}
