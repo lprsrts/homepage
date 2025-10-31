@@ -1,0 +1,28 @@
+{
+  "pages": {
+    "blog": {
+      "enabled": true,
+      "title": "Blog"
+    },
+    "meditations": {
+      "enabled": true,
+      "title": "Meditations"
+    },
+    "projects": {
+      "enabled": true,
+      "title": "Projects"
+    },
+    "updates": {
+      "enabled": true,
+      "title": "Updates"
+    },
+    "media": {
+      "enabled": true,
+      "title": "Media"
+    },
+    "shop": {
+      "enabled": false,
+      "title": "Shop"
+    }
+  }
+}

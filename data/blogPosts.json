@@ -1,0 +1,36 @@
+{
+  "posts": [
+    {
+      "id": "4",
+      "title": "asdasafafgfaDFVGFC",
+      "date": "2025-10-30",
+      "excerpt": "ASD<A:SLDM",
+      "content": "AMALSKMD:AKLS",
+      "published": true
+    },
+    {
+      "id": "3",
+      "title": "asdasdasda",
+      "date": "2025-10-30",
+      "excerpt": "asfasfsafasf",
+      "content": "asfasff",
+      "published": true
+    },
+    {
+      "id": "1",
+      "title": "Getting Started with Next.js",
+      "date": "2024-01-15",
+      "excerpt": "A comprehensive guide to building modern web applications with Next.js.",
+      "content": "",
+      "published": true
+    },
+    {
+      "id": "2",
+      "title": "The Power of Minimalism",
+      "date": "2024-01-10",
+      "excerpt": "Why less is more in design and development.",
+      "content": "",
+      "published": true
+    }
+  ]
+}
