@@ -1,7 +1,39 @@
+"use client";
+
 import Link from "next/link";
 import ThemeAwareProfilePicture from "@/components/ThemeAwareProfilePicture";
+import { useState, useEffect } from "react";
+
+interface PageConfig {
+  enabled: boolean;
+  title: string;
+}
+
+interface SiteConfig {
+  pages: {
+    [key: string]: PageConfig;
+  };
+}
 
 export default function Home() {
+  const [config, setConfig] = useState<SiteConfig | null>(null);
+
+  useEffect(() => {
+    fetch("/api/config")
+      .then((res) => res.json())
+      .then((data) => setConfig(data))
+      .catch(console.error);
+  }, []);
+
+  const pages = [
+    { key: "blog", href: "/blog" },
+    { key: "meditations", href: "/meditations" },
+    { key: "projects", href: "/projects" },
+    { key: "updates", href: "/updates" },
+    { key: "media", href: "/media" },
+    { key: "shop", href: "/shop" },
+  ];
+
   return (
     <main className="min-h-screen flex items-center justify-center p-6">
       <div className="text-center max-w-2xl">
@@ -21,24 +53,15 @@ export default function Home() {
 
         {/* Navigation Links */}
         <nav className="space-y-3 mb-12">
-          <Link href="/blog" className="block nav-link">
-            Blog
-          </Link>
-          <Link href="/meditations" className="block nav-link">
-            Meditations
-          </Link>
-          <Link href="/projects" className="block nav-link">
-            Projects
-          </Link>
-          <Link href="/updates" className="block nav-link">
-            Updates
-          </Link>
-          <Link href="/media" className="block nav-link">
-            Media
-          </Link>
-          <Link href="/shop" className="block nav-link">
-            Shop
-          </Link>
+          {pages.map(({ key, href }) => {
+            if (config && !config.pages[key]?.enabled) return null;
+            const title = config?.pages[key]?.title || key.charAt(0).toUpperCase() + key.slice(1);
+            return (
+              <Link key={key} href={href} className="block nav-link">
+                {title}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Social Links */}
