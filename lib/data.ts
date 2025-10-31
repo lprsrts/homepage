@@ -55,7 +55,22 @@ export interface MediaData {
   items: MediaItem[];
 }
 
-export const getAdminCredentials = () => readJSON<AdminCredentials>('admin.json');
+export const getAdminCredentials = (): AdminCredentials => {
+  // Try environment variables first (for production/Vercel)
+  if (process.env.ADMIN_USERNAME && process.env.ADMIN_PASSWORD_HASH) {
+    return {
+      username: process.env.ADMIN_USERNAME,
+      passwordHash: process.env.ADMIN_PASSWORD_HASH,
+    };
+  }
+  
+  // Fall back to admin.json file (for local development)
+  try {
+    return readJSON<AdminCredentials>('admin.json');
+  } catch (error) {
+    throw new Error('Admin credentials not configured. Set ADMIN_USERNAME and ADMIN_PASSWORD_HASH environment variables.');
+  }
+};
 export const getSiteConfig = () => readJSON<SiteConfig>('siteConfig.json');
 export const getBlogPosts = () => readJSON<BlogData>('blogPosts.json');
 export const getMedia = () => readJSON<MediaData>('media.json');

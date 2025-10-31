@@ -28,10 +28,16 @@ Generates static site in `out/` directory.
 
 Access at `/admin/login`
 
-Setup:
+**Local Setup:**
 1. Generate password hash: `node scripts/generatePassword.js yourpassword`
 2. Create `data/admin.json` with username and passwordHash
 3. Create `.env.local` with `JWT_SECRET=your-secret-key`
+
+**Production Setup:**
+Set environment variables:
+- `ADMIN_USERNAME`
+- `ADMIN_PASSWORD_HASH`
+- `JWT_SECRET`
 
 Manage content pages, blog posts, and media through the admin dashboard.
 

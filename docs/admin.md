@@ -4,6 +4,8 @@ Access admin panel at `/admin/login`
 
 ## Setup
 
+### Local Development
+
 1. Generate password hash:
 ```bash
 node scripts/generatePassword.js yourpassword
@@ -21,6 +23,13 @@ node scripts/generatePassword.js yourpassword
 ```
 JWT_SECRET=your-random-secret-key
 ```
+
+### Production (Vercel)
+
+Set environment variables in Vercel dashboard:
+- `ADMIN_USERNAME` - Your admin username
+- `ADMIN_PASSWORD_HASH` - Generated password hash
+- `JWT_SECRET` - Random secret key for JWT signing
 
 ## Features
 
