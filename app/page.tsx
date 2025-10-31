@@ -27,7 +27,6 @@ export default function Home() {
 
   const pages = [
     { key: "blog", href: "/blog" },
-    { key: "articles", href: "/articles" },
     { key: "meditations", href: "/meditations" },
     { key: "projects", href: "/projects" },
     { key: "updates", href: "/updates" },

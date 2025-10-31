@@ -4,10 +4,6 @@
       "enabled": true,
       "title": "Blog"
     },
-    "articles": {
-      "enabled": true,
-      "title": "Articles"
-    },
     "meditations": {
       "enabled": true,
       "title": "Meditations"
