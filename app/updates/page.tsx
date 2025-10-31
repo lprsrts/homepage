@@ -4,18 +4,8 @@ import Navigation from "@/components/Navigation";
 const updates = [
   {
     id: "1",
-    date: "2024-01-20",
-    content: "Released version 2.0 of Project Alpha with improved performance.",
-  },
-  {
-    id: "2",
-    date: "2024-01-15",
-    content: "Started working on a new CLI tool for developers.",
-  },
-  {
-    id: "3",
-    date: "2024-01-10",
-    content: "Published new blog post about minimalism in design.",
+    date: "2025-10-31",
+    content: "Released version 0.1 of my new homepage with initial design.",
   },
 ];
 

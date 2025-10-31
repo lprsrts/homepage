@@ -62,6 +62,42 @@ export default function AdminDashboard() {
           </Link>
 
           <Link
+            href="/admin/articles"
+            className="p-6 border rounded-lg hover:shadow-lg transition-shadow"
+            style={{ borderColor: "var(--color-accent-2)" }}
+          >
+            <h2 className="text-2xl font-bold mb-2">Articles</h2>
+            <p className="text-muted">Manage articles (card pile)</p>
+          </Link>
+
+          <Link
+            href="/admin/meditations"
+            className="p-6 border rounded-lg hover:shadow-lg transition-shadow"
+            style={{ borderColor: "var(--color-accent-2)" }}
+          >
+            <h2 className="text-2xl font-bold mb-2">Meditations</h2>
+            <p className="text-muted">Manage meditations</p>
+          </Link>
+
+          <Link
+            href="/admin/projects"
+            className="p-6 border rounded-lg hover:shadow-lg transition-shadow"
+            style={{ borderColor: "var(--color-accent-2)" }}
+          >
+            <h2 className="text-2xl font-bold mb-2">Projects</h2>
+            <p className="text-muted">Manage projects</p>
+          </Link>
+
+          <Link
+            href="/admin/updates"
+            className="p-6 border rounded-lg hover:shadow-lg transition-shadow"
+            style={{ borderColor: "var(--color-accent-2)" }}
+          >
+            <h2 className="text-2xl font-bold mb-2">Updates</h2>
+            <p className="text-muted">Manage timeline updates</p>
+          </Link>
+
+          <Link
             href="/admin/media"
             className="p-6 border rounded-lg hover:shadow-lg transition-shadow"
             style={{ borderColor: "var(--color-accent-2)" }}

@@ -1,6 +1,7 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this-in-production';
+const JWT_SECRET =
+  process.env.JWT_SECRET || "your-secret-key-change-this-in-production";
 
 export interface TokenPayload {
   username: string;
@@ -9,7 +10,7 @@ export interface TokenPayload {
 }
 
 export function signToken(payload: { username: string }): string {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
 }
 
 export function verifyToken(token: string): TokenPayload | null {
