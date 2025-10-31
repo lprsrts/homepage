@@ -1,9 +1,18 @@
+"use client";
+
 import Navigation from "@/components/Navigation";
 import Link from "next/link";
-import { getBlogPosts } from "@/lib/content";
+import { useState, useEffect } from "react";
 
 export default function Blog() {
-  const posts = getBlogPosts();
+  const [posts, setPosts] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("/api/blog")
+      .then((res) => res.json())
+      .then((data) => setPosts(data.posts || []))
+      .catch(console.error);
+  }, []);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

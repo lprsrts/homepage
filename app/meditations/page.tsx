@@ -1,9 +1,18 @@
+"use client";
+
 import Navigation from "@/components/Navigation";
 import Link from "next/link";
-import { getMeditations } from "@/lib/content";
+import { useState, useEffect } from "react";
 
 export default function Meditations() {
-  const meditations = getMeditations();
+  const [meditations, setMeditations] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("/api/meditations")
+      .then((res) => res.json())
+      .then((data) => setMeditations(data.meditations || []))
+      .catch(console.error);
+  }, []);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
