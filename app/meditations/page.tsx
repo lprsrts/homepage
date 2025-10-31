@@ -27,36 +27,26 @@ export default function Meditations() {
     <>
       <Navigation />
       <main className="content-container">
-        <div className="mb-12 text-center">
-          <h1 className="text-4xl font-bold mb-3 italic">Meditations</h1>
-          <p className="text-lg text-muted">Philosophical reflections and contemplations</p>
-        </div>
-        
-        <div className="space-y-8 max-w-2xl mx-auto">
+        <h1 className="text-4xl font-bold mb-8">Meditations</h1>
+        <div className="space-y-8">
           {meditations.map((meditation) => (
-            <Link key={meditation.slug} href={`/meditations/${meditation.slug}`}>
-              <article 
-                className="p-6 border-2 rounded hover:shadow-lg transition-all cursor-pointer"
-                style={{ 
-                  borderColor: "var(--color-accent-2)",
-                  backgroundColor: "transparent",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--color-shade-1)";
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "transparent";
-                  e.currentTarget.style.transform = "translateY(0)";
-                }}
+            <div
+              key={meditation.slug}
+              className="border p-6"
+              style={{ borderColor: "var(--color-accent-2)" }}
+            >
+              <Link href={`/meditations/${meditation.slug}`}>
+                <h2 className="text-2xl font-bold mb-3 hover:underline">{meditation.title}</h2>
+              </Link>
+              <p className="text-sm mb-4 text-muted">{formatDate(meditation.date)}</p>
+              <p className="mb-4">{meditation.excerpt}</p>
+              <Link
+                href={`/meditations/${meditation.slug}`}
+                className="text-sm hover:underline"
               >
-                <div className="text-center">
-                  <h2 className="text-2xl font-bold mb-3 italic">{meditation.title}</h2>
-                  <p className="text-sm mb-4 text-muted">{formatDate(meditation.date)}</p>
-                  <p className="text-muted italic leading-relaxed">&ldquo;{meditation.excerpt}&rdquo;</p>
-                </div>
-              </article>
-            </Link>
+                Read Meditation →
+              </Link>
+            </div>
           ))}
         </div>
 

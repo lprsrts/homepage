@@ -1,7 +1,14 @@
 import Navigation from "@/components/Navigation";
 import Link from "next/link";
-import { getMeditationBySlug } from "@/lib/content";
+import { getMeditationBySlug, getMeditations } from "@/lib/content";
 import { notFound } from "next/navigation";
+
+export function generateStaticParams() {
+  const meditations = getMeditations();
+  return meditations.map((meditation) => ({
+    slug: meditation.slug,
+  }));
+}
 
 export default function MeditationPost({ params }: { params: { slug: string } }) {
   const meditation = getMeditationBySlug(params.slug);
@@ -29,11 +36,11 @@ export default function MeditationPost({ params }: { params: { slug: string } })
       
       // Headers
       if (trimmed.startsWith("### ")) {
-        elements.push(<h3 key={index} className="text-2xl font-bold italic mt-8 mb-4 text-center">{trimmed.substring(4)}</h3>);
+        elements.push(<h3 key={index} className="text-2xl font-bold mt-8 mb-4">{trimmed.substring(4)}</h3>);
       } else if (trimmed.startsWith("## ")) {
-        elements.push(<h2 key={index} className="text-3xl font-bold italic mt-10 mb-4 text-center">{trimmed.substring(3)}</h2>);
+        elements.push(<h2 key={index} className="text-3xl font-bold mt-10 mb-4">{trimmed.substring(3)}</h2>);
       } else if (trimmed.startsWith("# ")) {
-        elements.push(<h1 key={index} className="text-4xl font-bold italic mt-12 mb-6 text-center">{trimmed.substring(2)}</h1>);
+        elements.push(<h1 key={index} className="text-4xl font-bold mt-12 mb-6">{trimmed.substring(2)}</h1>);
       }
       // Lists
       else if (trimmed.startsWith("- ")) {
@@ -41,7 +48,7 @@ export default function MeditationPost({ params }: { params: { slug: string } })
       }
       // Paragraphs
       else if (trimmed.length > 0) {
-        elements.push(<p key={index} className="mb-4 leading-relaxed text-justify">{line}</p>);
+        elements.push(<p key={index} className="mb-4 leading-relaxed">{line}</p>);
       }
       // Empty lines
       else {
@@ -55,27 +62,25 @@ export default function MeditationPost({ params }: { params: { slug: string } })
   return (
     <>
       <Navigation />
-      <main className="content-container max-w-2xl">
+      <main className="content-container">
         <Link 
           href="/meditations" 
-          className="inline-block mb-8 text-sm hover:underline text-muted"
+          className="inline-block mb-8 text-sm hover:underline"
         >
           ← Back to Meditations
         </Link>
 
         <article>
-          <header className="mb-10 pb-6 border-b-2 text-center" style={{ borderColor: "var(--color-accent-2)" }}>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 italic">{meditation.title}</h1>
-            <time className="text-muted">{formatDate(meditation.date)}</time>
-          </header>
+          <h1 className="text-4xl font-bold mb-4">{meditation.title}</h1>
+          <p className="text-sm mb-8 text-muted">{formatDate(meditation.date)}</p>
 
-          <div className="prose prose-lg max-w-none" style={{ color: "var(--color-shade-2)" }}>
+          <div className="prose max-w-none" style={{ color: "var(--color-shade-2)" }}>
             {renderMarkdown(meditation.content)}
           </div>
         </article>
 
-        <div className="mt-16 pt-8 border-t-2 text-center" style={{ borderColor: "var(--color-accent-2)" }}>
-          <Link href="/meditations" className="text-sm hover:underline text-muted">
+        <div className="mt-12 pt-8 border-t" style={{ borderColor: "var(--color-accent-2)" }}>
+          <Link href="/meditations" className="text-sm hover:underline">
             ← Back to Meditations
           </Link>
         </div>

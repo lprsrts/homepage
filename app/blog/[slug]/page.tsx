@@ -1,7 +1,14 @@
 import Navigation from "@/components/Navigation";
 import Link from "next/link";
-import { getBlogPostBySlug } from "@/lib/content";
+import { getBlogPostBySlug, getBlogPosts } from "@/lib/content";
 import { notFound } from "next/navigation";
+
+export function generateStaticParams() {
+  const posts = getBlogPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
   const post = getBlogPostBySlug(params.slug);
@@ -55,27 +62,25 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
   return (
     <>
       <Navigation />
-      <main className="content-container max-w-3xl">
+      <main className="content-container">
         <Link 
           href="/blog" 
-          className="inline-block mb-8 text-sm hover:underline text-muted"
+          className="inline-block mb-8 text-sm hover:underline"
         >
           ← Back to Blog
         </Link>
 
         <article>
-          <header className="mb-10 pb-6 border-b" style={{ borderColor: "var(--color-accent-1)" }}>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
-            <time className="text-muted font-mono">{formatDate(post.date)}</time>
-          </header>
+          <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+          <p className="text-sm mb-8 text-muted">{formatDate(post.date)}</p>
 
-          <div className="prose prose-lg max-w-none" style={{ color: "var(--color-shade-2)" }}>
+          <div className="prose max-w-none" style={{ color: "var(--color-shade-2)" }}>
             {renderMarkdown(post.content)}
           </div>
         </article>
 
-        <div className="mt-16 pt-8 border-t" style={{ borderColor: "var(--color-accent-2)" }}>
-          <Link href="/blog" className="text-sm hover:underline text-muted">
+        <div className="mt-12 pt-8 border-t" style={{ borderColor: "var(--color-accent-2)" }}>
+          <Link href="/blog" className="text-sm hover:underline">
             ← Back to Blog
           </Link>
         </div>

@@ -27,39 +27,26 @@ export default function Blog() {
     <>
       <Navigation />
       <main className="content-container">
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-3">Blog</h1>
-          <p className="text-lg text-muted">Technical writings and scientific explorations</p>
-        </div>
-        
-        <div className="space-y-6">
+        <h1 className="text-4xl font-bold mb-8">Blog</h1>
+        <div className="space-y-8">
           {posts.map((post) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`}>
-              <article 
-                className="p-6 border-l-4 hover:bg-opacity-50 transition-all cursor-pointer"
-                style={{ 
-                  borderColor: "var(--color-accent-1)",
-                  backgroundColor: "transparent",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--color-shade-1)";
-                  e.currentTarget.style.paddingLeft = "2rem";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "transparent";
-                  e.currentTarget.style.paddingLeft = "1.5rem";
-                }}
+            <div
+              key={post.slug}
+              className="border p-6"
+              style={{ borderColor: "var(--color-accent-2)" }}
+            >
+              <Link href={`/blog/${post.slug}`}>
+                <h2 className="text-2xl font-bold mb-3 hover:underline">{post.title}</h2>
+              </Link>
+              <p className="text-sm mb-4 text-muted">{formatDate(post.date)}</p>
+              <p className="mb-4">{post.excerpt}</p>
+              <Link
+                href={`/blog/${post.slug}`}
+                className="text-sm hover:underline"
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1">
-                    <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
-                    <p className="text-sm mb-3 text-muted font-mono">{formatDate(post.date)}</p>
-                    <p className="text-muted">{post.excerpt}</p>
-                  </div>
-                  <div className="text-2xl text-muted">→</div>
-                </div>
-              </article>
-            </Link>
+                Read Post →
+              </Link>
+            </div>
           ))}
         </div>
 
