@@ -30,21 +30,29 @@ export async function POST(request: Request) {
 
   try {
     const post = await request.json();
+    console.log("POST request received:", post);
 
-    if (!post.slug || !post.title) {
+    // Validate that slug and title are provided and not just whitespace
+    if (!post.slug?.trim() || !post.title?.trim()) {
+      console.log("Validation failed:", { slug: post.slug, title: post.title });
       return NextResponse.json(
         { error: "Slug and title are required" },
         { status: 400 }
       );
     }
 
-    saveBlogPost({
-      slug: post.slug,
-      title: post.title,
+    const postData = {
+      slug: post.slug.trim(),
+      title: post.title.trim(),
       date: post.date || new Date().toISOString().split("T")[0],
       excerpt: post.excerpt || "",
       content: post.content || "",
-    });
+      language: post.language,
+    };
+
+    console.log("Saving blog post:", postData);
+    saveBlogPost(postData);
+    console.log("Blog post saved successfully");
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -64,21 +72,29 @@ export async function PUT(request: Request) {
 
   try {
     const post = await request.json();
+    console.log("PUT request received:", post);
 
-    if (!post.slug || !post.title) {
+    // Validate that slug and title are provided and not just whitespace
+    if (!post.slug?.trim() || !post.title?.trim()) {
+      console.log("Validation failed:", { slug: post.slug, title: post.title });
       return NextResponse.json(
         { error: "Slug and title are required" },
         { status: 400 }
       );
     }
 
-    saveBlogPost({
-      slug: post.slug,
-      title: post.title,
+    const postData = {
+      slug: post.slug.trim(),
+      title: post.title.trim(),
       date: post.date || new Date().toISOString().split("T")[0],
       excerpt: post.excerpt || "",
       content: post.content || "",
-    });
+      language: post.language,
+    };
+
+    console.log("Updating blog post:", postData);
+    saveBlogPost(postData);
+    console.log("Blog post updated successfully");
 
     return NextResponse.json({ success: true });
   } catch (error) {

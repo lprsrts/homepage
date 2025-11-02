@@ -69,16 +69,45 @@ function saveContentToDirectory(directory: string, content: Content): void {
     fs.mkdirSync(directory, { recursive: true });
   }
 
-  const fileName = `${content.slug}.md`;
-  const filePath = path.join(directory, fileName);
+  // Check if file with this slug already exists (might have different filename)
+  let filePath: string;
+  const files = fs.readdirSync(directory);
+  const existingFile = files.find((f) => {
+    if (!f.endsWith(".md")) return false;
+    try {
+      const fullPath = path.join(directory, f);
+      const fileContents = fs.readFileSync(fullPath, "utf8");
+      const { data } = matter(fileContents);
+      const frontMatter = data as ContentFrontMatter;
+      return (frontMatter.slug || f.replace(/\.md$/, "")) === content.slug;
+    } catch {
+      return false;
+    }
+  });
 
-  const frontMatter = {
+  if (existingFile) {
+    // Update existing file
+    filePath = path.join(directory, existingFile);
+  } else {
+    // Create new file
+    const fileName = `${content.slug}.md`;
+    filePath = path.join(directory, fileName);
+  }
+
+  // Filter out undefined values to prevent YAML serialization errors
+  const frontMatter: Record<string, string> = {
     title: content.title,
     date: content.date,
     slug: content.slug,
-    excerpt: content.excerpt,
-    language: content.language,
   };
+
+  // Only add optional fields if they have values
+  if (content.excerpt) {
+    frontMatter.excerpt = content.excerpt;
+  }
+  if (content.language) {
+    frontMatter.language = content.language;
+  }
 
   const fileContent = matter.stringify(content.content, frontMatter);
   fs.writeFileSync(filePath, fileContent, "utf8");
@@ -86,7 +115,19 @@ function saveContentToDirectory(directory: string, content: Content): void {
 
 function deleteContentFromDirectory(directory: string, slug: string): void {
   const files = fs.readdirSync(directory);
-  const file = files.find((f) => f.replace(/\.md$/, "") === slug);
+  // Find file by checking slug in frontmatter, not just filename
+  const file = files.find((f) => {
+    if (!f.endsWith(".md")) return false;
+    try {
+      const fullPath = path.join(directory, f);
+      const fileContents = fs.readFileSync(fullPath, "utf8");
+      const { data } = matter(fileContents);
+      const frontMatter = data as ContentFrontMatter;
+      return (frontMatter.slug || f.replace(/\.md$/, "")) === slug;
+    } catch {
+      return false;
+    }
+  });
 
   if (file) {
     const filePath = path.join(directory, file);

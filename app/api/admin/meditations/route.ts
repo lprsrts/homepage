@@ -30,21 +30,29 @@ export async function POST(request: Request) {
 
   try {
     const meditation = await request.json();
+    console.log("POST meditation request received:", meditation);
 
-    if (!meditation.slug || !meditation.title) {
+    // Validate that slug and title are provided and not just whitespace
+    if (!meditation.slug?.trim() || !meditation.title?.trim()) {
+      console.log("Validation failed:", { slug: meditation.slug, title: meditation.title });
       return NextResponse.json(
         { error: "Slug and title are required" },
         { status: 400 }
       );
     }
 
-    saveMeditation({
-      slug: meditation.slug,
-      title: meditation.title,
+    const meditationData = {
+      slug: meditation.slug.trim(),
+      title: meditation.title.trim(),
       date: meditation.date || new Date().toISOString().split("T")[0],
       excerpt: meditation.excerpt || "",
       content: meditation.content || "",
-    });
+      language: meditation.language,
+    };
+
+    console.log("Saving meditation:", meditationData);
+    saveMeditation(meditationData);
+    console.log("Meditation saved successfully");
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -64,21 +72,29 @@ export async function PUT(request: Request) {
 
   try {
     const meditation = await request.json();
+    console.log("PUT meditation request received:", meditation);
 
-    if (!meditation.slug || !meditation.title) {
+    // Validate that slug and title are provided and not just whitespace
+    if (!meditation.slug?.trim() || !meditation.title?.trim()) {
+      console.log("Validation failed:", { slug: meditation.slug, title: meditation.title });
       return NextResponse.json(
         { error: "Slug and title are required" },
         { status: 400 }
       );
     }
 
-    saveMeditation({
-      slug: meditation.slug,
-      title: meditation.title,
+    const meditationData = {
+      slug: meditation.slug.trim(),
+      title: meditation.title.trim(),
       date: meditation.date || new Date().toISOString().split("T")[0],
       excerpt: meditation.excerpt || "",
       content: meditation.content || "",
-    });
+      language: meditation.language,
+    };
+
+    console.log("Updating meditation:", meditationData);
+    saveMeditation(meditationData);
+    console.log("Meditation updated successfully");
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -1,7 +1,8 @@
 ---
-title: Helmholtz Equation, Complex Phasor and Superposition
-date: 2025-09-12
-language: en
+title: 'Helmholtz Equation, Complex Phasor and Superposition'
+date: '2025-09-12'
+slug: 2025-09-12-helmholtz-equation-and-complex-phasor
+excerpt: 'A wave is, by definition, a phenomenon in time and space.'
 ---
 
 September 12, 2025

@@ -1,7 +1,8 @@
 ---
-title: 'Sesin Sessizliği'
-date: 2025-04-18
-langugage: tr
+title: Sesin Sessizliği
+date: '2025-04-18'
+slug: 2025-04-18-sesin-sessizligi
+excerpt: Oysa herkes kendi “doğal” çevresine alışır.
 ---
 
 ### Düşünsel Günlük: Çevre, İnsan ve Determinizm Üzerine Bir Yürüyüş
