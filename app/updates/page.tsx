@@ -32,7 +32,7 @@ export default function Updates() {
           <div className="space-y-6">
             {sortedUpdates.map((update) => (
               <div
-                key={update.name}
+                key={update.id}
                 className="flex gap-6 pb-6 border-b"
                 style={{ borderColor: "var(--color-accent-2)" }}
               >

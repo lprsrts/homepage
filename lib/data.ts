@@ -125,7 +125,8 @@ export const saveProjects = (data: ProjectsData) => writeJSON('projects.json', d
 
 // Updates types and functions
 export interface Update {
-  name: string;
+  id: string
+  name?: string;
   date: string;
   content: string;
   category?: string;

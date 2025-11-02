@@ -1,66 +1,77 @@
 {
   "updates": [
     {
+      "id": "11",
       "name": "Homepage v1.2.0",
       "date": "2025-11-02",
       "category": "Release",
       "content": "GitHub API integration for Vercel deployment with dual storage system"
     },
     {
+      "id": "10",
       "name": "Homepage v1.1.0",
       "date": "2025-11-02",
       "category": "Release",
       "content": "Projects and updates/timeline management features with full admin interface"
     },
     {
+      "id": "9",
       "name": "Homepage v1.0.1",
       "date": "2025-11-02",
       "category": "Update",
       "content": "Fixed save/edit functionality and added language labels"
     },
     {
+      "id": "8",
       "name": "Homepage v1.0.0",
       "date": "2025-10-31",
       "category": "Release",
       "content": "First stable release with Vercel Analytics, environment-based auth, and markdown support"
     },
     {
+      "id": "7",
       "name": "Homepage v0.9.0",
       "date": "2025-10-31",
       "category": "Update",
       "content": "Full markdown support with math equations, quotes, tables, and syntax highlighting"
     },
     {
+      "id": "6",
       "name": "Homepage v0.8.0",
       "date": "2025-10-31",
       "category": "Update",
       "content": "Blog and meditations pages with admin management"
     },
     {
+      "id": "5",
       "name": "Homepage v0.7.0",
       "date": "2025-10-31",
       "category": "Release",
       "content": "Comprehensive admin panel with JWT authentication and dynamic site configuration"
     },
     {
+      "id": "4",
       "name": "Homepage v0.6.0",
       "date": "2025-10-30",
       "category": "Update",
       "content": "Shopping cart and checkout functionality"
     },
     {
+      "id": "3",
       "name": "Homepage v0.5.0",
       "date": "2025-10-28",
       "category": "Update",
       "content": "Theme-aware profile pictures with cache-busting"
     },
     {
+      "id": "2",
       "name": "Homepage v0.4.0",
       "date": "2025-10-28",
       "category": "Release",
       "content": "Complete theme switching system with palette-based colors"
     },
     {
+      "id": "1",
       "name": "Homepage v0.1.0",
       "date": "2025-10-28",
       "category": "Release",
