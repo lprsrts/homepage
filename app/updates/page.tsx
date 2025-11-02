@@ -32,7 +32,7 @@ export default function Updates() {
           <div className="space-y-6">
             {sortedUpdates.map((update) => (
               <div
-                key={update.id}
+                key={update.name}
                 className="flex gap-6 pb-6 border-b"
                 style={{ borderColor: "var(--color-accent-2)" }}
               >
@@ -50,7 +50,10 @@ export default function Updates() {
                     </span>
                   )}
                 </div>
-                <p>{update.content}</p>
+                <div className="flex-1">
+                  <p className="mb-2">{update.content}</p>
+                  <span className="text-xs text-muted">{update.name}</span>
+                </div>
               </div>
             ))}
           </div>
