@@ -4,15 +4,23 @@
       "id": "1",
       "title": "difiplotter",
       "description": "A C++ study project for visualizing directional fields of differential equations using SFML.",
-      "tech": ["C++", "CMake", "SFML"],
+      "tech": [
+        "C++",
+        "CMake",
+        "SFML"
+      ],
       "link": "https://github.com/lprsrts/difiplotter",
-      "featured": true
+      "featured": false
     },
     {
       "id": "2",
       "title": "game-of-life",
       "description": "Conway's Game of Life with simple GUI.",
-      "tech": ["C++", "CMake", "SFML"],
+      "tech": [
+        "C++",
+        "CMake",
+        "SFML"
+      ],
       "link": "https://github.com/lprsrts/game-of-life",
       "featured": false
     }
