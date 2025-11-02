@@ -18,6 +18,14 @@
 - Public display at `/projects` page
 - API endpoints for both admin and public access
 
+#### Updates/Timeline Management
+- New admin interface at `/admin/updates` for managing activity timeline
+- Full CRUD operations (Create, Read, Update, Delete)
+- Optional category tagging (Release, Update, Announcement, News)
+- Automatic date sorting (newest first)
+- Public display at `/updates` page
+- API endpoints for both admin and public access
+
 #### Enhanced Admin Panel
 - Fixed save/edit functionality for blog posts and meditations
 - Added proper validation for required fields
@@ -96,6 +104,13 @@
 - Saved to `data/projects.json`
 - Full Vercel support
 
+### Updates Management (`/admin/updates`)
+- Create, edit, delete timeline updates
+- Optional category tagging
+- Automatic date sorting
+- Saved to `data/updates.json`
+- Full Vercel support
+
 ### Meditations Management (`/admin/meditations`)
 - Create, edit, delete meditation posts
 - Markdown content with frontmatter
@@ -123,6 +138,7 @@
 - `GET /api/blog` - Blog posts
 - `GET /api/meditations` - Meditations
 - `GET /api/projects` - Projects
+- `GET /api/updates` - Timeline updates
 
 **Admin (authenticated):**
 - `/api/admin/login` - Authentication
@@ -131,6 +147,7 @@
 - `/api/admin/blog` - Blog post management
 - `/api/admin/meditations` - Meditation management
 - `/api/admin/projects` - Projects management
+- `/api/admin/updates` - Timeline updates management
 
 ## Migration Notes
 
