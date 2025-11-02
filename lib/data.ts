@@ -122,3 +122,25 @@ export const getProjects = () => {
 };
 
 export const saveProjects = (data: ProjectsData) => writeJSON('projects.json', data);
+
+// Updates types and functions
+export interface Update {
+  id: string;
+  date: string;
+  content: string;
+  category?: string;
+}
+
+export interface UpdatesData {
+  updates: Update[];
+}
+
+export const getUpdates = () => {
+  try {
+    return readJSON<UpdatesData>('updates.json');
+  } catch (error) {
+    return { updates: [] };
+  }
+};
+
+export const saveUpdates = (data: UpdatesData) => writeJSON('updates.json', data);
