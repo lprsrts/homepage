@@ -6,6 +6,7 @@ import Link from "next/link";
 
 interface Update {
   id: string;
+  name?: string;
   date: string;
   content: string;
   category?: string;
@@ -48,6 +49,7 @@ export default function AdminUpdates() {
     setIsCreating(true);
     setEditingUpdate({
       id: "",
+      name: "",
       date: new Date().toISOString().split("T")[0],
       content: "",
       category: "",
@@ -163,6 +165,22 @@ export default function AdminUpdates() {
             <h2 className="text-2xl font-bold">{isCreating ? "New Update" : "Edit Update"}</h2>
             
             <div>
+              <label className="block mb-2 font-medium">Name (optional)</label>
+              <input
+                type="text"
+                value={editingUpdate.name || ""}
+                onChange={(e) => setEditingUpdate({ ...editingUpdate, name: e.target.value || undefined })}
+                placeholder="e.g., Homepage v1.3.0"
+                className="w-full p-3 border rounded"
+                style={{
+                  borderColor: "var(--color-accent-2)",
+                  backgroundColor: "var(--color-background)",
+                  color: "var(--color-text)",
+                }}
+              />
+            </div>
+
+            <div>
               <label className="block mb-2 font-medium">Date</label>
               <input
                 type="date"
@@ -251,6 +269,9 @@ export default function AdminUpdates() {
                   style={{ borderColor: "var(--color-accent-2)" }}
                 >
                   <div className="flex-1">
+                    {update.name && (
+                      <h3 className="font-semibold mb-1">{update.name}</h3>
+                    )}
                     <div className="flex items-center gap-2 mb-2">
                       <time className="text-sm text-muted min-w-[100px]">
                         {formatDate(update.date)}

@@ -63,6 +63,7 @@ export async function POST(request: NextRequest) {
     // Add update
     data.updates.push({
       id: update.id,
+      name: update.name || undefined,
       date: update.date,
       content: update.content.trim(),
       category: update.category || undefined,
@@ -117,6 +118,7 @@ export async function PUT(request: NextRequest) {
     // Update entry
     data.updates[index] = {
       id: update.id,
+      name: update.name || undefined,
       date: update.date,
       content: update.content.trim(),
       category: update.category || undefined,
