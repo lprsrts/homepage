@@ -1,6 +1,7 @@
 ---
 title: 'Kitabın Azı, Zarar'
 date: 2025-04-22
+language: tr
 ---
 
 ### Düşünsel Günlük: En Doğal Öğrenme, Kendiliğinden Olandır

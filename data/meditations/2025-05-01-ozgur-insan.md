@@ -1,6 +1,7 @@
 ---
 title: Özgür İnsan
 date: 2025-05-01
+language: tr
 ---
 
 ### Düşünsel Günlük: Özgür İrade

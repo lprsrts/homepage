@@ -1,6 +1,7 @@
 ---
 title: Helmholtz Equation, Complex Phasor and Superposition
 date: 2025-09-12
+language: en
 ---
 
 September 12, 2025

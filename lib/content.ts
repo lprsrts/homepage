@@ -10,6 +10,7 @@ export interface ContentFrontMatter {
   date: string;
   slug?: string;
   excerpt?: string;
+  language?: string;
 }
 
 export interface Content {
@@ -18,6 +19,7 @@ export interface Content {
   date: string;
   excerpt: string;
   content: string;
+  language?: string;
 }
 
 function getContentFromDirectory(directory: string): Content[] {
@@ -43,6 +45,7 @@ function getContentFromDirectory(directory: string): Content[] {
         date: frontMatter.date || new Date().toISOString().split("T")[0],
         excerpt: frontMatter.excerpt || content.substring(0, 150).replace(/\n/g, " ") + "...",
         content,
+        language: frontMatter.language,
       };
     });
 
@@ -74,6 +77,7 @@ function saveContentToDirectory(directory: string, content: Content): void {
     date: content.date,
     slug: content.slug,
     excerpt: content.excerpt,
+    language: content.language,
   };
 
   const fileContent = matter.stringify(content.content, frontMatter);

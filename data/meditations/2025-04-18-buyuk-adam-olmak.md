@@ -1,6 +1,7 @@
 ---
 title: 'Büyük Adam Olmak'
 date: 2025-04-18
+language: tr
 ---
 
 ### Düşünsel Günlük: Fikirler ve Anlam Arayışımı Kaydediyorum

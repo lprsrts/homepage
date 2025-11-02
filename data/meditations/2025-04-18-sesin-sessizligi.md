@@ -1,6 +1,7 @@
 ---
 title: 'Sesin Sessizliği'
 date: 2025-04-18
+langugage: tr
 ---
 
 ### Düşünsel Günlük: Çevre, İnsan ve Determinizm Üzerine Bir Yürüyüş

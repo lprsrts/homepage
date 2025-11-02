@@ -38,7 +38,14 @@ export default function Blog() {
               <Link href={`/blog/${post.slug}`}>
                 <h2 className="text-2xl font-bold mb-3 hover:underline">{post.title}</h2>
               </Link>
-              <p className="text-sm mb-4 text-muted">{formatDate(post.date)}</p>
+              <div className="flex items-center gap-3 mb-4">
+                <p className="text-sm text-muted">{formatDate(post.date)}</p>
+                {post.language && (
+                  <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: "var(--color-accent-2)", opacity: 0.6 }}>
+                    {post.language}
+                  </span>
+                )}
+              </div>
               <p className="mb-4">{post.excerpt}</p>
               <Link
                 href={`/blog/${post.slug}`}
