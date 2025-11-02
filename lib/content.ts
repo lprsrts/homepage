@@ -1,9 +1,22 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { GitHubStorage } from "./github-storage";
 
 const blogDirectory = path.join(process.cwd(), "data/blog");
 const meditationsDirectory = path.join(process.cwd(), "data/meditations");
+
+// Check if we're running on Vercel (read-only filesystem)
+const isVercel = process.env.VERCEL === "1";
+let githubStorage: GitHubStorage | null = null;
+
+if (isVercel) {
+  try {
+    githubStorage = new GitHubStorage();
+  } catch (error) {
+    console.error("Failed to initialize GitHub storage:", error);
+  }
+}
 
 export interface ContentFrontMatter {
   title: string;
@@ -64,7 +77,15 @@ function getContentBySlugFromDirectory(
   return contents.find((content) => content.slug === slug) || null;
 }
 
-function saveContentToDirectory(directory: string, content: Content): void {
+async function saveContentToDirectory(directory: string, content: Content): Promise<void> {
+  // Use GitHub storage on Vercel
+  if (isVercel && githubStorage) {
+    const dirName = directory.includes("blog") ? "data/blog" : "data/meditations";
+    await githubStorage.saveContent(dirName, content);
+    return;
+  }
+
+  // Use filesystem locally
   if (!fs.existsSync(directory)) {
     fs.mkdirSync(directory, { recursive: true });
   }
@@ -113,7 +134,15 @@ function saveContentToDirectory(directory: string, content: Content): void {
   fs.writeFileSync(filePath, fileContent, "utf8");
 }
 
-function deleteContentFromDirectory(directory: string, slug: string): void {
+async function deleteContentFromDirectory(directory: string, slug: string): Promise<void> {
+  // Use GitHub storage on Vercel
+  if (isVercel && githubStorage) {
+    const dirName = directory.includes("blog") ? "data/blog" : "data/meditations";
+    await githubStorage.deleteContent(dirName, slug);
+    return;
+  }
+
+  // Use filesystem locally
   const files = fs.readdirSync(directory);
   // Find file by checking slug in frontmatter, not just filename
   const file = files.find((f) => {
@@ -144,12 +173,12 @@ export function getBlogPostBySlug(slug: string): Content | null {
   return getContentBySlugFromDirectory(blogDirectory, slug);
 }
 
-export function saveBlogPost(content: Content): void {
-  saveContentToDirectory(blogDirectory, content);
+export async function saveBlogPost(content: Content): Promise<void> {
+  await saveContentToDirectory(blogDirectory, content);
 }
 
-export function deleteBlogPost(slug: string): void {
-  deleteContentFromDirectory(blogDirectory, slug);
+export async function deleteBlogPost(slug: string): Promise<void> {
+  await deleteContentFromDirectory(blogDirectory, slug);
 }
 
 // Meditation functions
@@ -161,10 +190,10 @@ export function getMeditationBySlug(slug: string): Content | null {
   return getContentBySlugFromDirectory(meditationsDirectory, slug);
 }
 
-export function saveMeditation(content: Content): void {
-  saveContentToDirectory(meditationsDirectory, content);
+export async function saveMeditation(content: Content): Promise<void> {
+  await saveContentToDirectory(meditationsDirectory, content);
 }
 
-export function deleteMeditation(slug: string): void {
-  deleteContentFromDirectory(meditationsDirectory, slug);
+export async function deleteMeditation(slug: string): Promise<void> {
+  await deleteContentFromDirectory(meditationsDirectory, slug);
 }

@@ -51,7 +51,7 @@ export async function POST(request: Request) {
     };
 
     console.log("Saving blog post:", postData);
-    saveBlogPost(postData);
+    await saveBlogPost(postData);
     console.log("Blog post saved successfully");
 
     return NextResponse.json({ success: true });
@@ -93,7 +93,7 @@ export async function PUT(request: Request) {
     };
 
     console.log("Updating blog post:", postData);
-    saveBlogPost(postData);
+    await saveBlogPost(postData);
     console.log("Blog post updated successfully");
 
     return NextResponse.json({ success: true });
@@ -120,7 +120,7 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: "Slug is required" }, { status: 400 });
     }
 
-    deleteBlogPost(slug);
+    await deleteBlogPost(slug);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting blog post:", error);

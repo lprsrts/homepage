@@ -51,7 +51,7 @@ export async function POST(request: Request) {
     };
 
     console.log("Saving meditation:", meditationData);
-    saveMeditation(meditationData);
+    await saveMeditation(meditationData);
     console.log("Meditation saved successfully");
 
     return NextResponse.json({ success: true });
@@ -93,7 +93,7 @@ export async function PUT(request: Request) {
     };
 
     console.log("Updating meditation:", meditationData);
-    saveMeditation(meditationData);
+    await saveMeditation(meditationData);
     console.log("Meditation updated successfully");
 
     return NextResponse.json({ success: true });
@@ -120,7 +120,7 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: "Slug is required" }, { status: 400 });
     }
 
-    deleteMeditation(slug);
+    await deleteMeditation(slug);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting meditation:", error);

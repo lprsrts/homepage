@@ -30,6 +30,18 @@ Set environment variables in Vercel dashboard:
 - `ADMIN_USERNAME` - Your admin username
 - `ADMIN_PASSWORD_HASH` - Generated password hash
 - `JWT_SECRET` - Random secret key for JWT signing
+- `GITHUB_TOKEN` - GitHub Personal Access Token with repo write access
+- `GITHUB_OWNER` - Your GitHub username/organization
+- `GITHUB_REPO` - Your repository name (e.g., "homepage")
+- `GITHUB_BRANCH` - Branch to commit to (default: "main")
+
+#### Creating a GitHub Token
+
+1. Go to GitHub Settings > Developer settings > Personal access tokens > Tokens (classic)
+2. Generate new token with `repo` scope (full control of private repositories)
+3. Copy the token and add it as `GITHUB_TOKEN` in Vercel environment variables
+
+**Note**: On Vercel, the filesystem is read-only, so all content changes are committed directly to your GitHub repository via the GitHub API.
 
 ## Features
 
@@ -47,8 +59,15 @@ Set environment variables in Vercel dashboard:
 
 ## Data Storage
 
+### Local Development
 All data stored in `/data` directory:
 - `admin.json` - Admin credentials
 - `siteConfig.json` - Page configuration
-- `blogPosts.json` - Blog posts
+- `data/blog/` - Blog posts as markdown files
+- `data/meditations/` - Meditation posts as markdown files
 - `media.json` - Media references
+
+### Production (Vercel)
+- Content is read from the repository at build time
+- Edits are committed directly to the GitHub repository via GitHub API
+- Changes trigger automatic redeployment on Vercel
