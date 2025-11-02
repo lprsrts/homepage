@@ -1,81 +1,70 @@
 {
   "updates": [
     {
-      "version": "1.2.0",
-      "name": "GitHub Integration",
+      "name": "Homepage v1.2.0",
       "date": "2025-11-02",
       "category": "Release",
-      "description": "GitHub API integration for Vercel deployment with dual storage system"
+      "content": "GitHub API integration for Vercel deployment with dual storage system"
     },
     {
-      "version": "1.1.0",
-      "name": "Content Management System",
+      "name": "Homepage v1.1.0",
       "date": "2025-11-02",
       "category": "Release",
-      "description": "Projects and updates/timeline management features with full admin interface"
+      "content": "Projects and updates/timeline management features with full admin interface"
     },
     {
-      "version": "1.0.1",
-      "name": "Admin Panel Fixes",
+      "name": "Homepage v1.0.1",
       "date": "2025-11-02",
       "category": "Update",
-      "description": "Fixed save/edit functionality and added language labels"
+      "content": "Fixed save/edit functionality and added language labels"
     },
     {
-      "version": "1.0.0",
-      "name": "Foundation",
+      "name": "Homepage v1.0.0",
       "date": "2025-10-31",
       "category": "Release",
-      "description": "First stable release with Vercel Analytics, environment-based auth, and markdown support"
+      "content": "First stable release with Vercel Analytics, environment-based auth, and markdown support"
     },
     {
-      "version": "0.9.0",
-      "name": "Enhanced Markdown",
+      "name": "Homepage v0.9.0",
       "date": "2025-10-31",
       "category": "Update",
-      "description": "Full markdown support with math equations, quotes, tables, and syntax highlighting"
+      "content": "Full markdown support with math equations, quotes, tables, and syntax highlighting"
     },
     {
-      "version": "0.8.0",
-      "name": "Content Pages",
+      "name": "Homepage v0.8.0",
       "date": "2025-10-31",
       "category": "Update",
-      "description": "Blog and meditations pages with admin management"
+      "content": "Blog and meditations pages with admin management"
     },
     {
-      "version": "0.7.0",
-      "name": "Admin Panel",
+      "name": "Homepage v0.7.0",
       "date": "2025-10-31",
       "category": "Release",
-      "description": "Comprehensive admin panel with JWT authentication and dynamic site configuration"
+      "content": "Comprehensive admin panel with JWT authentication and dynamic site configuration"
     },
     {
-      "version": "0.6.0",
-      "name": "E-commerce Features",
+      "name": "Homepage v0.6.0",
       "date": "2025-10-30",
       "category": "Update",
-      "description": "Shopping cart and checkout functionality"
+      "content": "Shopping cart and checkout functionality"
     },
     {
-      "version": "0.5.0",
-      "name": "Profile Pictures",
+      "name": "Homepage v0.5.0",
       "date": "2025-10-28",
       "category": "Update",
-      "description": "Theme-aware profile pictures with cache-busting"
+      "content": "Theme-aware profile pictures with cache-busting"
     },
     {
-      "version": "0.4.0",
-      "name": "Theme System",
+      "name": "Homepage v0.4.0",
       "date": "2025-10-28",
       "category": "Release",
-      "description": "Complete theme switching system with palette-based colors"
+      "content": "Complete theme switching system with palette-based colors"
     },
     {
-      "version": "0.1.0",
-      "name": "Initial Release",
+      "name": "Homepage v0.1.0",
       "date": "2025-10-28",
       "category": "Release",
-      "description": "Minimal personal website template"
+      "content": "Minimal personal website template"
     }
   ]
 }
