@@ -205,4 +205,37 @@ export class GitHubStorage {
       throw new Error(`Failed to delete from GitHub: ${error}`);
     }
   }
+
+  async saveJSON(filePath: string, data: any, message: string): Promise<void> {
+    // Get existing file SHA if it exists
+    const existingFile = await this.getFile(filePath);
+
+    const jsonContent = JSON.stringify(data, null, 2);
+    const url = `https://api.github.com/repos/${this.owner}/${this.repo}/contents/${filePath}`;
+
+    const body: any = {
+      message,
+      content: Buffer.from(jsonContent).toString("base64"),
+      branch: this.branch,
+    };
+
+    if (existingFile?.sha) {
+      body.sha = existingFile.sha;
+    }
+
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        Authorization: `token ${this.token}`,
+        Accept: "application/vnd.github.v3+json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Failed to save JSON to GitHub: ${error}`);
+    }
+  }
 }

@@ -31,7 +31,9 @@ export async function PUT(request: NextRequest) {
 
   try {
     const newConfig = await request.json();
-    saveSiteConfig(newConfig);
+    console.log('Saving site config:', newConfig);
+    await saveSiteConfig(newConfig);
+    console.log('Site config saved successfully');
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Config update error:', error);

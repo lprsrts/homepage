@@ -1,7 +1,20 @@
 import fs from 'fs';
 import path from 'path';
+import { GitHubStorage } from './github-storage';
 
 const dataDir = path.join(process.cwd(), 'data');
+
+// Check if we're running on Vercel
+const isVercel = process.env.VERCEL === '1';
+let githubStorage: GitHubStorage | null = null;
+
+if (isVercel) {
+  try {
+    githubStorage = new GitHubStorage();
+  } catch (error) {
+    console.error('Failed to initialize GitHub storage:', error);
+  }
+}
 
 export function readJSON<T>(filename: string): T {
   const filePath = path.join(dataDir, filename);
@@ -9,7 +22,14 @@ export function readJSON<T>(filename: string): T {
   return JSON.parse(content);
 }
 
-export function writeJSON<T>(filename: string, data: T): void {
+export async function writeJSON<T>(filename: string, data: T): Promise<void> {
+  // Use GitHub storage on Vercel
+  if (isVercel && githubStorage) {
+    await githubStorage.saveJSON(`data/${filename}`, data, `Update ${filename}`);
+    return;
+  }
+
+  // Use filesystem locally
   const filePath = path.join(dataDir, filename);
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
 }
@@ -78,3 +98,27 @@ export const getMedia = () => readJSON<MediaData>('media.json');
 export const saveSiteConfig = (data: SiteConfig) => writeJSON('siteConfig.json', data);
 export const saveBlogPosts = (data: BlogData) => writeJSON('blogPosts.json', data);
 export const saveMedia = (data: MediaData) => writeJSON('media.json', data);
+
+// Projects types and functions
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  tech: string[];
+  link: string;
+  featured?: boolean;
+}
+
+export interface ProjectsData {
+  projects: Project[];
+}
+
+export const getProjects = () => {
+  try {
+    return readJSON<ProjectsData>('projects.json');
+  } catch (error) {
+    return { projects: [] };
+  }
+};
+
+export const saveProjects = (data: ProjectsData) => writeJSON('projects.json', data);
