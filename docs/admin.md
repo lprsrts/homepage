@@ -47,6 +47,7 @@ Set environment variables in Vercel dashboard:
 
 - `/admin/pages` - Toggle pages on/off
 - `/admin/blog` - Manage blog posts
+- `/admin/projects` - Manage projects
 - `/admin/media` - Upload and manage media
 - `/admin/meditations` - Manage meditation posts
 
@@ -63,11 +64,13 @@ Set environment variables in Vercel dashboard:
 All data stored in `/data` directory:
 - `admin.json` - Admin credentials
 - `siteConfig.json` - Page configuration
+- `projects.json` - Projects data
 - `data/blog/` - Blog posts as markdown files
 - `data/meditations/` - Meditation posts as markdown files
 - `media.json` - Media references
 
 ### Production (Vercel)
 - Content is read from the repository at build time
-- Edits are committed directly to the GitHub repository via GitHub API
+- All edits (JSON files and markdown) are committed directly to GitHub via GitHub API
 - Changes trigger automatic redeployment on Vercel
+- Supports: blog posts, meditations, projects, and page settings
