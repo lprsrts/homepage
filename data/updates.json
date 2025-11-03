@@ -1,6 +1,13 @@
 {
   "updates": [
     {
+      "id": "12",
+      "name": "New blog post",
+      "date": "2025-11-03",
+      "content": "I digitized a text I wrote in August. Representing charge density distributions as island peaks.",
+      "category": "news"
+    },
+    {
       "id": "11",
       "name": "Homepage v1.2.0",
       "date": "2025-11-02",
