@@ -50,7 +50,7 @@ export interface SiteConfig {
   };
 }
 
-export interface BlogPost {
+export interface MemoirPost {
   id: string;
   title: string;
   date: string;
@@ -59,8 +59,8 @@ export interface BlogPost {
   published: boolean;
 }
 
-export interface BlogData {
-  posts: BlogPost[];
+export interface MemoirData {
+  posts: MemoirPost[];
 }
 
 export interface MediaItem {
@@ -92,11 +92,11 @@ export const getAdminCredentials = (): AdminCredentials => {
   }
 };
 export const getSiteConfig = () => readJSON<SiteConfig>('siteConfig.json');
-export const getBlogPosts = () => readJSON<BlogData>('blogPosts.json');
+export const getMemoirPosts = () => readJSON<MemoirData>('memoirPosts.json');
 export const getMedia = () => readJSON<MediaData>('media.json');
 
 export const saveSiteConfig = (data: SiteConfig) => writeJSON('siteConfig.json', data);
-export const saveBlogPosts = (data: BlogData) => writeJSON('blogPosts.json', data);
+export const saveMemoirPosts = (data: MemoirData) => writeJSON('memoirPosts.json', data);
 export const saveMedia = (data: MediaData) => writeJSON('media.json', data);
 
 // Projects types and functions

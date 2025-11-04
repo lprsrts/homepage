@@ -4,7 +4,7 @@ import { useAuth, getAuthHeaders } from "@/hooks/useAuth";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-interface BlogPost {
+interface MemoirPost {
   slug: string;
   title: string;
   date: string;
@@ -20,10 +20,10 @@ interface MediaItem {
   uploadedAt: string;
 }
 
-export default function AdminBlog() {
+export default function AdminMemoir() {
   const { loading, authenticated } = useAuth();
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
+  const [posts, setPosts] = useState<MemoirPost[]>([]);
+  const [editingPost, setEditingPost] = useState<MemoirPost | null>(null);
   const [isCreating, setIsCreating] = useState(false);
   const [message, setMessage] = useState("");
   const [showMediaBrowser, setShowMediaBrowser] = useState(false);
@@ -37,7 +37,7 @@ export default function AdminBlog() {
 
   const loadPosts = async () => {
     try {
-      const res = await fetch("/api/admin/blog", {
+      const res = await fetch("/api/admin/memoir", {
         headers: getAuthHeaders(),
       });
       const data = await res.json();
@@ -80,7 +80,7 @@ export default function AdminBlog() {
     });
   };
 
-  const handleEdit = (post: BlogPost) => {
+  const handleEdit = (post: MemoirPost) => {
     setIsCreating(false);
     setEditingPost({ ...post });
   };
@@ -90,7 +90,7 @@ export default function AdminBlog() {
 
     try {
       const method = isCreating ? "POST" : "PUT";
-      const res = await fetch("/api/admin/blog", {
+      const res = await fetch("/api/admin/memoir", {
         method,
         headers: getAuthHeaders(),
         body: JSON.stringify(editingPost),
@@ -112,7 +112,7 @@ export default function AdminBlog() {
     if (!confirm("Are you sure you want to delete this post?")) return;
 
     try {
-      const res = await fetch(`/api/admin/blog?slug=${slug}`, {
+      const res = await fetch(`/api/admin/memoir?slug=${slug}`, {
         method: "DELETE",
         headers: getAuthHeaders(),
       });
@@ -147,7 +147,7 @@ export default function AdminBlog() {
             ← Back to Dashboard
           </Link>
           <div className="flex justify-between items-center">
-            <h1 className="text-4xl font-bold">Blog Posts</h1>
+            <h1 className="text-4xl font-bold">Memoirs</h1>
             {!editingPost && (
               <button
                 onClick={handleCreate}
@@ -237,7 +237,7 @@ export default function AdminBlog() {
                   backgroundColor: "var(--color-background)",
                   color: "var(--color-text)",
                 }}
-                placeholder="blog-post-slug"
+                placeholder="memoir-post-slug"
               />
             </div>
 

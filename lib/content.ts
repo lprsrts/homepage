@@ -3,7 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { GitHubStorage } from "./github-storage";
 
-const blogDirectory = path.join(process.cwd(), "data/blog");
+const memoirDirectory = path.join(process.cwd(), "data/memoir");
 const meditationsDirectory = path.join(process.cwd(), "data/meditations");
 
 // Check if we're running on Vercel (read-only filesystem)
@@ -80,7 +80,7 @@ function getContentBySlugFromDirectory(
 async function saveContentToDirectory(directory: string, content: Content): Promise<void> {
   // Use GitHub storage on Vercel
   if (isVercel && githubStorage) {
-    const dirName = directory.includes("blog") ? "data/blog" : "data/meditations";
+    const dirName = directory.includes("memoir") ? "data/memoir" : "data/meditations";
     await githubStorage.saveContent(dirName, content);
     return;
   }
@@ -137,7 +137,7 @@ async function saveContentToDirectory(directory: string, content: Content): Prom
 async function deleteContentFromDirectory(directory: string, slug: string): Promise<void> {
   // Use GitHub storage on Vercel
   if (isVercel && githubStorage) {
-    const dirName = directory.includes("blog") ? "data/blog" : "data/meditations";
+    const dirName = directory.includes("memoir") ? "data/memoir" : "data/meditations";
     await githubStorage.deleteContent(dirName, slug);
     return;
   }
@@ -164,21 +164,21 @@ async function deleteContentFromDirectory(directory: string, slug: string): Prom
   }
 }
 
-// Blog functions
-export function getBlogPosts(): Content[] {
-  return getContentFromDirectory(blogDirectory);
+// Memoir functions
+export function getMemoirPosts(): Content[] {
+  return getContentFromDirectory(memoirDirectory);
 }
 
-export function getBlogPostBySlug(slug: string): Content | null {
-  return getContentBySlugFromDirectory(blogDirectory, slug);
+export function getMemoirPostBySlug(slug: string): Content | null {
+  return getContentBySlugFromDirectory(memoirDirectory, slug);
 }
 
-export async function saveBlogPost(content: Content): Promise<void> {
-  await saveContentToDirectory(blogDirectory, content);
+export async function saveMemoirPost(content: Content): Promise<void> {
+  await saveContentToDirectory(memoirDirectory, content);
 }
 
-export async function deleteBlogPost(slug: string): Promise<void> {
-  await deleteContentFromDirectory(blogDirectory, slug);
+export async function deleteMemoirPost(slug: string): Promise<void> {
+  await deleteContentFromDirectory(memoirDirectory, slug);
 }
 
 // Meditation functions

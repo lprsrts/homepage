@@ -1,8 +1,8 @@
 {
   "pages": {
-    "blog": {
+    "memoir": {
       "enabled": true,
-      "title": "Blog"
+      "title": "Memoirs"
     },
     "meditations": {
       "enabled": true,

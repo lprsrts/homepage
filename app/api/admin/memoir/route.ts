@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyAuth } from "@/lib/auth";
-import { getBlogPosts, saveBlogPost, deleteBlogPost } from "@/lib/content";
+import { getMemoirPosts, saveMemoirPost, deleteMemoirPost } from "@/lib/content";
 
 export const dynamic = 'force-dynamic';
 
@@ -11,12 +11,12 @@ export async function GET(request: Request) {
   }
 
   try {
-    const posts = getBlogPosts();
+    const posts = getMemoirPosts();
     return NextResponse.json({ posts });
   } catch (error) {
-    console.error("Error loading blog posts:", error);
+    console.error("Error loading memoir posts:", error);
     return NextResponse.json(
-      { error: "Failed to load blog posts" },
+      { error: "Failed to load memoir posts" },
       { status: 500 }
     );
   }
@@ -50,15 +50,15 @@ export async function POST(request: Request) {
       language: post.language,
     };
 
-    console.log("Saving blog post:", postData);
-    await saveBlogPost(postData);
-    console.log("Blog post saved successfully");
+    console.log("Saving memoir post:", postData);
+    await saveMemoirPost(postData);
+    console.log("Memoir post saved successfully");
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error creating blog post:", error);
+    console.error("Error creating memoir post:", error);
     return NextResponse.json(
-      { error: "Failed to create blog post" },
+      { error: "Failed to create memoir post" },
       { status: 500 }
     );
   }
@@ -92,15 +92,15 @@ export async function PUT(request: Request) {
       language: post.language,
     };
 
-    console.log("Updating blog post:", postData);
-    await saveBlogPost(postData);
-    console.log("Blog post updated successfully");
+    console.log("Updating memoir post:", postData);
+    await saveMemoirPost(postData);
+    console.log("Memoir post updated successfully");
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error updating blog post:", error);
+    console.error("Error updating memoir post:", error);
     return NextResponse.json(
-      { error: "Failed to update blog post" },
+      { error: "Failed to update memoir post" },
       { status: 500 }
     );
   }
@@ -120,12 +120,12 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: "Slug is required" }, { status: 400 });
     }
 
-    await deleteBlogPost(slug);
+    await deleteMemoirPost(slug);
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error deleting blog post:", error);
+    console.error("Error deleting memoir post:", error);
     return NextResponse.json(
-      { error: "Failed to delete blog post" },
+      { error: "Failed to delete memoir post" },
       { status: 500 }
     );
   }

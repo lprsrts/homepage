@@ -4,11 +4,11 @@ import Navigation from "@/components/Navigation";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-export default function Blog() {
+export default function Memoir() {
   const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("/api/blog")
+    fetch("/api/memoir")
       .then((res) => res.json())
       .then((data) => setPosts(data.posts || []))
       .catch(console.error);
@@ -27,7 +27,7 @@ export default function Blog() {
     <>
       <Navigation />
       <main className="content-container">
-        <h1 className="text-4xl font-bold mb-8">Blog</h1>
+        <h1 className="text-4xl font-bold mb-8">Memoirs</h1>
         <div className="space-y-8">
           {posts.map((post) => (
             <div
@@ -35,7 +35,7 @@ export default function Blog() {
               className="border p-6"
               style={{ borderColor: "var(--color-accent-2)" }}
             >
-              <Link href={`/blog/${post.slug}`}>
+              <Link href={`/memoir/${post.slug}`}>
                 <h2 className="text-2xl font-bold mb-3 hover:underline">{post.title}</h2>
               </Link>
               <div className="flex items-center gap-3 mb-4">
@@ -48,7 +48,7 @@ export default function Blog() {
               </div>
               <p className="mb-4">{post.excerpt}</p>
               <Link
-                href={`/blog/${post.slug}`}
+                href={`/memoir/${post.slug}`}
                 className="text-sm hover:underline"
               >
                 Read Post →
@@ -58,7 +58,7 @@ export default function Blog() {
         </div>
 
         {posts.length === 0 && (
-          <p className="text-center text-muted py-12">No blog posts yet.</p>
+          <p className="text-center text-muted py-12">No memoirs yet.</p>
         )}
       </main>
     </>

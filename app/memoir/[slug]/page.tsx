@@ -1,6 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Link from "next/link";
-import { getBlogPostBySlug, getBlogPosts } from "@/lib/content";
+import { getMemoirPostBySlug, getMemoirPosts } from "@/lib/content";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
@@ -8,14 +8,14 @@ import remarkGfm from "remark-gfm";
 import rehypeKatex from "rehype-katex";
 
 export function generateStaticParams() {
-  const posts = getBlogPosts();
+  const posts = getMemoirPosts();
   return posts.map((post) => ({
     slug: post.slug,
   }));
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const post = getBlogPostBySlug(params.slug);
+export default function MemoirPost({ params }: { params: { slug: string } }) {
+  const post = getMemoirPostBySlug(params.slug);
 
   if (!post) {
     notFound();
@@ -35,10 +35,10 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
       <Navigation />
       <main className="content-container">
         <Link 
-          href="/blog" 
+          href="/memoir" 
           className="inline-block mb-8 text-sm hover:underline"
         >
-          ← Back to Blog
+          ← Back to Memoirs
         </Link>
 
         <article>
@@ -56,8 +56,8 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
         </article>
 
         <div className="mt-12 pt-8 border-t" style={{ borderColor: "var(--color-accent-2)" }}>
-          <Link href="/blog" className="text-sm hover:underline">
-            ← Back to Blog
+          <Link href="/memoir" className="text-sm hover:underline">
+            ← Back to Memoirs
           </Link>
         </div>
       </main>
