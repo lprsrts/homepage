@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import ThemeAwareProfilePicture from "@/components/ThemeAwareProfilePicture";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { useState, useEffect } from "react";
 
 interface PageConfig {
@@ -89,6 +90,7 @@ export default function Home() {
           </a>
         </div>
       </div>
+      <ThemeSwitcher />
     </main>
   );
 }

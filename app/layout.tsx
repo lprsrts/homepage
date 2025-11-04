@@ -4,7 +4,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { CartProvider } from "@/components/CartProvider";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 export const metadata: Metadata = {
   title: "lprsrts",
@@ -30,7 +29,6 @@ export default function RootLayout({
         <ThemeProvider>
           <CartProvider>
             {children}
-            <ThemeSwitcher />
           </CartProvider>
         </ThemeProvider>
         <Analytics />
