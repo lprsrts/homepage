@@ -12,12 +12,22 @@ interface BlogPost {
   content: string;
 }
 
+interface MediaItem {
+  id: string;
+  filename: string;
+  url: string;
+  type: "image" | "video";
+  uploadedAt: string;
+}
+
 export default function AdminBlog() {
   const { loading, authenticated } = useAuth();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
   const [isCreating, setIsCreating] = useState(false);
   const [message, setMessage] = useState("");
+  const [showMediaBrowser, setShowMediaBrowser] = useState(false);
+  const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
 
   useEffect(() => {
     if (authenticated) {
@@ -35,6 +45,28 @@ export default function AdminBlog() {
     } catch (error) {
       console.error("Failed to load posts:", error);
     }
+  };
+
+  const loadMedia = async () => {
+    try {
+      const res = await fetch("/api/admin/media", {
+        headers: getAuthHeaders(),
+      });
+      const data = await res.json();
+      setMediaItems(data.items);
+    } catch (error) {
+      console.error("Failed to load media:", error);
+    }
+  };
+
+  const insertImage = (url: string, filename: string) => {
+    if (!editingPost) return;
+    const imageMarkdown = `\n![${filename}](${url})\n`;
+    setEditingPost({
+      ...editingPost,
+      content: editingPost.content + imageMarkdown,
+    });
+    setShowMediaBrowser(false);
   };
 
   const handleCreate = () => {
@@ -210,7 +242,22 @@ export default function AdminBlog() {
             </div>
 
             <div>
-              <label className="block mb-2 font-medium">Content (Markdown)</label>
+              <div className="flex justify-between items-center mb-2">
+                <label className="font-medium">Content (Markdown)</label>
+                <button
+                  onClick={() => {
+                    setShowMediaBrowser(true);
+                    loadMedia();
+                  }}
+                  className="px-3 py-1 text-sm rounded font-medium"
+                  style={{
+                    backgroundColor: "var(--color-accent-2)",
+                    color: "var(--color-background)",
+                  }}
+                >
+                  📷 Insert Image
+                </button>
+              </div>
               <textarea
                 value={editingPost.content}
                 onChange={(e) => setEditingPost({ ...editingPost, content: e.target.value })}
@@ -288,6 +335,67 @@ export default function AdminBlog() {
                 </div>
               </div>
             ))}
+          </div>
+        )}
+
+        {/* Media Browser Modal */}
+        {showMediaBrowser && (
+          <div
+            className="fixed inset-0 flex items-center justify-center p-4"
+            style={{
+              backgroundColor: "rgba(0, 0, 0, 0.7)",
+              zIndex: 50,
+            }}
+            onClick={() => setShowMediaBrowser(false)}
+          >
+            <div
+              className="max-w-4xl w-full max-h-[80vh] overflow-auto p-6 rounded"
+              style={{
+                backgroundColor: "var(--color-background)",
+                borderColor: "var(--color-accent-2)",
+                border: "2px solid",
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-2xl font-bold">Select Image</h2>
+                <button
+                  onClick={() => setShowMediaBrowser(false)}
+                  className="px-4 py-2 rounded font-medium"
+                  style={{
+                    backgroundColor: "var(--color-accent-2)",
+                    color: "var(--color-background)",
+                  }}
+                >
+                  Close
+                </button>
+              </div>
+
+              {mediaItems.length === 0 ? (
+                <div className="text-center py-12 text-muted">
+                  No images yet. Go to <Link href="/admin/media" className="underline">Media</Link> to upload some.
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {mediaItems.filter(item => item.type === 'image').map((item) => (
+                    <div
+                      key={item.id}
+                      className="border rounded p-2 cursor-pointer hover:opacity-80"
+                      style={{ borderColor: "var(--color-accent-2)" }}
+                      onClick={() => insertImage(item.url, item.filename)}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={item.url}
+                        alt={item.filename}
+                        className="w-full h-32 object-cover rounded mb-2"
+                      />
+                      <p className="text-sm truncate">{item.filename}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>

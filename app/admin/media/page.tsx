@@ -17,6 +17,8 @@ export default function AdminMedia() {
   const [items, setItems] = useState<MediaItem[]>([]);
   const [newItem, setNewItem] = useState<Partial<MediaItem> | null>(null);
   const [message, setMessage] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [uploadMode, setUploadMode] = useState<'upload' | 'url'>('upload');
 
   useEffect(() => {
     if (authenticated) {
@@ -42,6 +44,46 @@ export default function AdminMedia() {
       url: "",
       type: "image",
     });
+    setUploadMode('upload');
+  };
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    setMessage("");
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('folder', 'sketches'); // or 'uploads' - you can make this configurable
+
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error('Upload failed');
+
+      const data = await res.json();
+      
+      // Update the form with the uploaded file info
+      setNewItem(prev => ({
+        ...prev,
+        filename: data.originalName,
+        url: data.url,
+        type: data.type.startsWith('image/') ? 'image' : 'video',
+      }));
+
+      setMessage('File uploaded successfully! Click Save to add to media library.');
+    } catch (error) {
+      console.error('Upload error:', error);
+      setMessage('Failed to upload file');
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleSave = async () => {
@@ -139,6 +181,48 @@ export default function AdminMedia() {
           <div className="space-y-4 p-6 border rounded mb-6" style={{ borderColor: "var(--color-accent-2)" }}>
             <h2 className="text-2xl font-bold">Add New Media</h2>
 
+            <div className="flex gap-2 mb-4">
+              <button
+                onClick={() => setUploadMode('upload')}
+                className="px-4 py-2 rounded font-medium"
+                style={{
+                  backgroundColor: uploadMode === 'upload' ? "var(--color-accent-1)" : "var(--color-accent-2)",
+                  color: "var(--color-background)",
+                }}
+              >
+                Upload File
+              </button>
+              <button
+                onClick={() => setUploadMode('url')}
+                className="px-4 py-2 rounded font-medium"
+                style={{
+                  backgroundColor: uploadMode === 'url' ? "var(--color-accent-1)" : "var(--color-accent-2)",
+                  color: "var(--color-background)",
+                }}
+              >
+                Enter URL
+              </button>
+            </div>
+
+            {uploadMode === 'upload' && (
+              <div>
+                <label className="block mb-2 font-medium">Select File</label>
+                <input
+                  type="file"
+                  accept="image/*,video/*"
+                  onChange={handleFileUpload}
+                  disabled={uploading}
+                  className="w-full p-3 border rounded"
+                  style={{
+                    borderColor: "var(--color-accent-2)",
+                    backgroundColor: "var(--color-background)",
+                    color: "var(--color-text)",
+                  }}
+                />
+                {uploading && <p className="text-sm mt-2 text-muted">Uploading...</p>}
+              </div>
+            )}
+
             <div>
               <label className="block mb-2 font-medium">Filename</label>
               <input
@@ -152,6 +236,7 @@ export default function AdminMedia() {
                   backgroundColor: "var(--color-background)",
                   color: "var(--color-text)",
                 }}
+                readOnly={uploadMode === 'upload'}
               />
             </div>
 
@@ -168,6 +253,7 @@ export default function AdminMedia() {
                   backgroundColor: "var(--color-background)",
                   color: "var(--color-text)",
                 }}
+                readOnly={uploadMode === 'upload'}
               />
             </div>
 
