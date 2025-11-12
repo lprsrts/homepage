@@ -1,9 +1,10 @@
 ---
 title: From Gaussian to Quantum Uncertainty
-date: 2025-11-12
+date: 2025-11-12T00:00:00.000Z
 slug: 2025-11-12-from-gaussian-to-quantum-uncertainty
-excerpt: the world can’t be described by fixed points because the more you try to pin something down, the more everything else seizes out of existence.
+excerpt: The world can’t be described by fixed points because the more you try to pin something down, the more everything else seizes out of existence.
 ---
+
 
 Today I opened Desmos and plotted a function I always found visually satisfying:
 
@@ -52,7 +53,7 @@ A point charge is not a real finite distribution; it’s a limit of something in
 
 So I differentiated my Gaussian — visually, on [Desmos](https://www.desmos.com/calculator/5nfow4tqy2) — and it was clear that its slope became steeper as (a) decreased. The “field,” in my mind, became more intense but confined to a smaller region.
 
-![A screenshot of the configuration](/sketches/normal-distributed-charge-density-desmos.jpeg)
+![A screenshot of the configuration](/plots/normal-distributed-charge-density-desmos.jpeg)
 
 The more I tried to localize the charge, the more violent the field became. This field is exactly the magnitude of the divergence of the displacement vector.
 
