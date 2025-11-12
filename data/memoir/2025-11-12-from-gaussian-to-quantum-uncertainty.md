@@ -49,7 +49,7 @@ A point charge is not a real finite distribution; it’s a limit of something in
 
 So I differentiated my Gaussian — visually, on [Desmos](https://www.desmos.com/calculator/5nfow4tqy2) — and it was clear that its slope became steeper as $$ (a) $$ decreased. The “field,” in my mind, became more intense but confined to a smaller region.
 
-![A screenshot of the configuration](/plots/normal-distributed-charge-density-desmos.jpeg)
+![A screenshot of the configuration](/plots/normal-distributed-charge-density.jpeg)
 
 The more I tried to localize the charge, the more violent the field became. This field is exactly the magnitude of the divergence of the displacement vector.
 
