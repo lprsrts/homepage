@@ -11,7 +11,7 @@ $$
 f(x) = e^{-x^2}
 $$
 
-The shape was calm, centered, and somehow complete. Then I added a shift (x_0) to move it along the axis, and out of curiosity, I integrated it from $$ -\infty $$ to $$ +\infty $$. The value came out as about $$ 1.772... $$ . If you are someone who "plays" with a calculator often you might know this number, I do. That number is $$ \sqrt{\pi} $$. There is a [video](https://www.youtube.com/watch?v=cy8r7WSuT1I) from 3Blue1Brown explaining the reason.
+The shape was calm, centered, and somehow complete. Then I added a shift $$ x_0 $$ to move it along the axis, and out of curiosity, I integrated it from $$ -\infty $$ to $$ +\infty $$. The value came out as about $$ 1.772... $$ . If you are someone who "plays" with a calculator often you might know this number, I do. That number is $$ \sqrt{\pi} $$. There is a [video](https://www.youtube.com/watch?v=cy8r7WSuT1I) from 3Blue1Brown explaining the reason.
 
 So I divided by that constant and defined:
 
@@ -66,7 +66,7 @@ $$
 $$
 
 To see the particle sharply in space, $$ a $$ must shrink but then its frequency content, its “momentum,” explodes across all values.
-And if I stretch $$ a $$, the wave becomes smooth and global, but I lose the ability to say *where* it is exactly. I can only say that a single point charge is inside this mountain. The peak is visually clear to me but even if I put my finger on the x axis where I "think" the peak falls to I will miss the exact position by a infinitesimal value.
+And if I stretch $$ a $$, the wave becomes smooth and global, but I lose the ability to say *where* it is exactly. I can only say that a single point charge is inside this mountain. The peak is visually clear to me but even if I put my finger on the x axis where I "think" the peak falls to I will miss the exact position by an infinitesimal value.
 
 The entire structure of quantum mechanics suddenly felt natural: The world can’t be described by fixed points because the more you try to pin something down, the more everything else its motion, its energy, its surrounding field becomes infinite or undefined or seizes out of existence.
 
