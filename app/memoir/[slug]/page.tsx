@@ -6,12 +6,41 @@ import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
 import remarkGfm from "remark-gfm";
 import rehypeKatex from "rehype-katex";
+import type { Metadata } from "next";
 
 export function generateStaticParams() {
   const posts = getMemoirPosts();
   return posts.map((post) => ({
     slug: post.slug,
   }));
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const post = getMemoirPostBySlug(params.slug);
+
+  if (!post) {
+    return {
+      title: "Memoir Not Found",
+    };
+  }
+
+  const title = post.title;
+  const description = post.excerpt || post.content.slice(0, 160);
+  const publishedTime = post.date;
+  const url = `https://lprsrts.com/memoir/${params.slug}`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      publishedTime,
+      url,
+      authors: ["Alper Saritas"],
+    },
+  };
 }
 
 export default function MemoirPost({ params }: { params: { slug: string } }) {
@@ -30,8 +59,34 @@ export default function MemoirPost({ params }: { params: { slug: string } }) {
     });
   };
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      '@type': 'Person',
+      name: 'Alper Saritas',
+      url: 'https://lprsrts.com',
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'Alper Saritas',
+    },
+    description: post.excerpt || post.content.slice(0, 160),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://lprsrts.com/memoir/${params.slug}`,
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navigation />
       <main className="content-container">
         <Link 

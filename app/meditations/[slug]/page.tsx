@@ -6,12 +6,41 @@ import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
 import remarkGfm from "remark-gfm";
 import rehypeKatex from "rehype-katex";
+import type { Metadata } from "next";
 
 export function generateStaticParams() {
   const meditations = getMeditations();
   return meditations.map((meditation) => ({
     slug: meditation.slug,
   }));
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const meditation = getMeditationBySlug(params.slug);
+
+  if (!meditation) {
+    return {
+      title: "Meditation Not Found",
+    };
+  }
+
+  const title = meditation.title;
+  const description = meditation.excerpt || meditation.content.slice(0, 160);
+  const publishedTime = meditation.date;
+  const url = `https://lprsrts.com/meditations/${params.slug}`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      publishedTime,
+      url,
+      authors: ["Alper Saritas"],
+    },
+  };
 }
 
 export default function MeditationPost({ params }: { params: { slug: string } }) {
@@ -30,8 +59,34 @@ export default function MeditationPost({ params }: { params: { slug: string } })
     });
   };
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: meditation.title,
+    datePublished: meditation.date,
+    dateModified: meditation.date,
+    author: {
+      '@type': 'Person',
+      name: 'Alper Saritas',
+      url: 'https://lprsrts.com',
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'Alper Saritas',
+    },
+    description: meditation.excerpt || meditation.content.slice(0, 160),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://lprsrts.com/meditations/${params.slug}`,
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navigation />
       <main className="content-container">
         <Link 
